@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content=""/>
+		<title>测试用例---弹窗组件</title>
+		<script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="id">
+			测试用例
+		</div>
+		<script type="text/javascript">
+//			var mbox = {
+//				init:function(e){
+//					this.time = e || 1;
+//					this.id = document.getElementById(e.id);
+//					this.show = this.render(e);
+//					this.node = this.htmlnode(e);
+//				},
+//				render:function(e){
+//					var _this = e;
+//				},
+//				hide:function(e){
+//					var _this = e;
+//					document.getElementById(_this.id).style.display = "none";
+//				},
+//				htmlnode:function(e){
+//					var _this = e;
+//					document.getElementById(_this.id).style.backgroundColor = "#000";
+//					setTimeout(function(){
+//						console.log(e.time)
+//						mbox.hide(e);
+//					},parseInt(_this.time * 1000));
+//				},
+//				body:function(){
+//					var _this = this;
+//				}
+//			}
+//			mbox.init({time:6,id:"id"});
+			
+			
+			//独立的自制弹窗库   开发中ing
+//			(function(root,factory){
+//				//配置  浏览器内置对象    ---amd(异步模块定义)   ---cmd(公共模块定义)  ---umd(通用模块定义)
+//				if (typeof define === 'function' && define.amd) {
+//					define(['$', 'query'], factory);
+//				} else if (typeof exports === 'object') { //umd
+//					module.exports = factory();
+//				} else {
+//					root.Cnzmg = factory(window.Zepto || window.jQuery || $);
+//				}
+//				
+//			})(this, function($,jQuery){
+//				$.fn.Cnzmg = function(settings){
+//					var arr = [];
+//					$(this).each(function(){
+//						var options = $.extend({
+//							target: $(this)
+//						}, settings);
+//						var cn = new Cnzmg();
+//						cn.init(options);
+//						arr.push(cn);	//追加到数组
+//					});
+//					return arr;
+//				}
+//				function Cnzmg(){
+//					//节点参数
+//					var ran = Math.random().toString().replace('.','');
+//					this.id = "cnzmg_" + ran;
+//				}
+//				Cnzmg.prototype = {
+//					init:function(settings){
+//						this.settings = $.extend({
+//							callback: null,
+//							pageSize: 1
+//						}, settings);
+//						this.target = function(){};
+//						this.shop = function(){};
+//					},
+//					callbackfn:function(){},
+//					session:function(){}
+//				}
+//				return Cnzmg;
+//			});
+			
+		</script>
+		<!--<script type="text/javascript">
+			$('#id').Cnzmg({
+				pageSize:10,
+				callback:function(){
+					alert(1);
+				}
+			})
+		</script>-->
+		<script type="text/javascript">
+			//单例模式
+			class CreateUser {
+				constructor (name) {
+					this.name = name;
+					this.getName();		
+				}
+				getName(){
+					return name;
+				}
+			}
+			//代理实现单例模式
+			var ProxyMode = (function(){
+				var instance = null;
+				return function(name){
+					if(!instance){
+						instance = new CreateUser(name);
+					}
+					return instance;
+				}
+			})();
+			//测试单例模式示例
+			var a = new ProxyMode();
+			var b = new ProxyMode();
+            //因为单体模式是只实例化一次，所以下面的实例是相等的
+			console.log(a === b);
+			
+			//策略模式
+			var lv = {  //策略类
+				A:function(m){
+					return m * 4;
+				},
+				B:function(m){
+					return m * 3;
+				},
+				C:function(m){
+					return m * 2;
+				}
+			}
+			//环境类
+			var calculateBouns = function(obj,m){
+				return lv[obj](m);
+			};
+			console.log(calculateBouns('A',3000))
+		</script>
+	</body>
+</html>
