@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>super version cnzmg Popups</title>
+	<script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+	<style type="text/css">
+		.g-cnzmg-contianer{
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-color: rgba(0,0,0,0.6);
+		    display: -webkit-box;
+		    -webkit-box-pack:center;
+		    -webkit-box-align:center;
+		}
+		.g-cnzmg-contianer .cnzmg-window{
+		    padding: 1em;
+		    border-radius: 10px;
+		    background-color: rgba(0,0,0,0.8);
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-header{
+		    width: 50px;
+		    height: 50px;
+		    margin: 0 auto;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-header.waiting{
+		    background: url("/images/5a053c385a108.jpg")no-repeat 0 0;
+		    background-size: 50px;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-header.warning{
+		    background: url("/images/5a053c385a108.jpg") no-repeat 0 0;
+		    background-size: 50px;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-header.success{
+		    background: url("success.png")no-repeat 0 0;
+		    background-size: 50px;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-header.none{
+		    background: none;
+		    background-size: 50px;
+		    width: 0;
+		    height: 0;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-container{
+		    padding: 1em 1em 0;
+		    color: #fff;
+		    line-height: 180%;
+		    text-align: center;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-footer{
+		    padding: 1em 1em 0;
+		    display: -webkit-flex;
+		    -webkit-justify-content:center;
+		    -webkit-align-items:center;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-footer button{
+		    -webkit-appearance:normal;
+		    background-color: rgba(255,255,255,0.8);
+		    padding: 0.8em 1.8em;
+		    border: none;
+		    color: #eee;
+		    border-radius: 5px;
+		    margin: 0 1.3em;
+		    text-shadow: #666 1px 1px 0;
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-footer button.green{
+		    background-color: rgba(2,202,200,0.8);
+		}
+		.g-cnzmg-contianer .cnzmg-window .cnzmg-footer button.red{
+		    background-color: rgba(251,23,50,0.8);
+		}
+		
+	</style>
+</head>
+<body>
+	<script src="/javascripts/moduleBox.js" type="text/javascript" charset="utf-8"></script>
+	<div class="g-cnzmg-contianer">
+        <div class="cnzmg-window">
+            <div class="cnzmg-header waiting"></div>
+            <div class="cnzmg-container">请点击弹框组件</div>
+            <div class="cnzmg-footer">
+                <button class="green" onclick="cnzmg1()">按钮1</button>
+                <button class="red">按钮2</button>
+            </div>
+        </div>
+	</div>
+	
+	
+	
+	
+	
+<div id="Copyright">
+	<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action"  style="position: fixed;bottom: 0;right: 0;color: #fff;"> 粤ICP备17071425号-1</a>
+</div>
+<script type="text/javascript">
+function cnzmg1() {
+    var cnzmg = new Cnzmg({
+    	overclone:'cnzmg'
+    });
+    cnzmg.init();
+}
+
+function cnzmg2() {
+    var cnzmg = new Cnzmg({
+        width: "auto",
+        height: "auto",
+        type: "waiting",
+		message:'this is mbox',
+        delay: 20000,
+    });
+    cnzmg.init();
+}
+
+function cnzmg3() {
+    var cnzmg = new Cnzmg({
+        width: "auto",
+        height: "auto",
+        type: "success",
+        buttons: [{
+            type: "green",
+            text: "确定",
+        }, {
+            type: "red",
+            text: "取消"
+        }]
+    });
+    cnzmg.init();
+}
+
+function cnzmg4() {
+    var cnzmg = new Cnzmg({
+        width: "auto",
+        height: "auto",
+        type: "warning",
+        buttons: [{
+            type: "green",
+            text: "确定",
+            callback: function() {
+
+            }
+        }]
+    });
+    cnzmg.init();
+}
+
+function cnzmg5() {
+    var cnzmg = new Cnzmg({
+        width: "auto",
+        height: "auto",
+        buttons: [{
+            type: "green",
+            text: "确定",
+            callback: function() {
+				//回调函数
+            }
+        }, {
+            type: "green",
+            text: "确定",
+            callback: function() {
+				//回调函数
+            }
+        }, {
+            type: "green",
+            text: "确定",
+            callback: function() {
+				//回调函数
+            }
+        }]
+    });
+    cnzmg.init();
+}
+
+function cnzmg6() {
+    var cnzmg = new Cnzmg({
+        width: "auto",
+        height: "auto",
+        message: "这是弹窗！！！！",
+        type: "warning",
+        buttons: [{
+            type: "green",
+            text: "确定",
+            callback: function() {
+                window.open('http://www.uin8.com');
+            }
+        }, {
+            type: "red",
+            text: "取消"
+        }],
+        maskOpcity: 0.6
+    });
+    cnzmg.init();
+}
+</script>
+</body>
+</html>

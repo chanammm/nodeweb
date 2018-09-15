@@ -1,0 +1,471 @@
+/*		
+ * 		dev：cnzmg
+ *		time：2018-08-30
+ * 		atouch: c
+ */
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	max-width: 640px;
+	min-width: 320px;
+	margin: 0 auto !important;
+}
+img{
+	width: 100%;
+}
+.c-container-body{
+	width: 100%;
+	height: auto;
+	background: #000;
+	overflow: hidden;
+	color: #fff;
+}
+.c-header-btn{
+	width: 100%;
+	padding:0 1rem;
+	box-sizing: border-box;
+	height: 40px;
+	overflow: hidden;
+	line-height: 40px;
+}
+.c-header-btn div{
+	float: left;
+}
+.c-header-btn .c-location-address{
+	width: 20%;
+	position: relative;
+	margin-right: 10px;
+}
+.c-header-btn .c-location-address:after{
+	content: '';
+	display: inline-block;
+	width:0; 
+    height:0; 
+    border-left:4px solid transparent;
+    border-right:4px solid transparent;
+    border-top:4px solid #fff;
+    position: absolute;
+    top: 18px;
+    right: 12px;
+}
+.c-header-btn .c-search-input{
+	width: 100%;
+	position: relative;
+	background: #f7f7f7;
+	border-radius: 10px;
+	margin: 6px 0;
+	line-height: 26px;
+}
+.c-header-btn .c-search-input input{
+	width: 100%;
+	border: none;
+	text-align: center;
+	background: none;
+	line-height: 26px;
+}
+.c-header-btn .c-search-input:before{
+	content: '';
+	background: url(/images/search.png) no-repeat center center;
+	background-size: 80%;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	position: absolute;
+	left: 3rem;
+	top: 0;
+}
+/*************************/
+.c-ad-banner {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+.c-ad-banner .bd {
+	position: relative;
+	z-index: 0;
+	width: 100%;
+}
+
+.c-ad-banner .bd li {
+	width: 100%;
+	position: relative;
+}
+
+.c-ad-banner .bd li img {
+	height: 200px;
+}
+/****************************/
+.c-aclick-btn{
+	width: 90%;
+	margin-left: 5%;
+	height: 40px;
+	box-shadow: 0px 0px 3px #c1c1c1;
+	text-align: center;
+	line-height: 40px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+.c-aclick-btn:after{
+	content: '免押金';
+	background: red;
+	border-radius: 10px;
+	color: #fff;
+	font-size: 10px;
+	padding: 0 6px;
+	text-align: center;
+}
+.c-carhot-context{
+	width: 100%;
+}
+.c-title{
+	width: 100%;
+	position: relative;
+	padding: 3% 5%;
+	box-sizing: border-box;
+	display: inline-block;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.c-title:after{
+	content: '更多';
+	float: right;
+	font-size: 12px;
+	color: #CCCCCC;
+	line-height: 25px;
+	font-weight: normal;
+}
+.c-carhot-context .c-carhot-text small,.c-garage-context .c-carhot-text small{
+	font-size: 12px;
+	border: 1px solid #a9a9a9;
+	color: #a9a9a9;
+	padding:0 6px ;
+	border-radius: 5px;
+	display: inline-block;
+}
+.c-carhot-context .c-carhot-text p,.c-garage-context .c-carhot-text p{
+	color: red;
+}
+.c-carhot-context .c-carhot-text h3{
+	margin: 0;
+}
+.c-active-item{
+	width: 100%;
+	height: auto;
+	margin-bottom: 65px;
+}
+.c-active-item ul li{
+	/*padding: 0 5%;*/
+	margin-bottom: 10px;
+}
+.c-active-item .c-active-img img{
+	/*border-radius: 10px;*/
+}
+.c-active-item .c-active-doc p{
+	margin: 0;
+}
+.c-active-item .c-active-doc span{
+	font-size: 12px;
+	color: #9a9a9a;
+}
+/************************************/
+.c-garage-top{
+	float: right !important;
+	width: 30% !important;
+}
+.c-garage-right{
+	width: 40% !important;
+	display: inline-block;
+	float: left !important;
+}
+.c-garage-right:nth-of-type(2){
+	margin-right: 0;
+	margin-left: 10px;
+}
+.c-garage-right:after{
+	right: -2px !important;
+}
+.c-border{
+	box-shadow: 0px 0px 2px darkgrey;
+}
+.c-container-content{
+	height: auto;
+	overflow: hidden;
+}
+.c-container-content ul{
+	width: 200%;
+}
+.c-container-content ul li{
+	float: left;
+	width: 50%;
+	height: 200px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.c-container-content ul li span{
+	float: left;
+	width: 18%;
+	height: 40%;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 0 1% 4% 1%;
+	background: url(../images/83232944.png) no-repeat center center;
+	background-clip: content-box;
+	background-size: 160%;
+	position: relative;
+	text-align: center;
+	line-height: 157px;
+}
+.c-container-content ul li span small{
+	font-size: 10px;
+}
+.c-garage-context{
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	margin-bottom: 65px;
+}
+.c-garage-context ul li{
+	width: 100%;
+	height: auto;
+	float: left;
+}
+.c-garage-context .c-carhot-img img{
+	/*border-radius: 10px;*/
+}
+.c-garage-context .c-carhot-text h3{
+	margin: 0;
+	font-size: 1rem;
+}
+.c-garage-tor-menu{
+	height: auto;
+	overflow: hidden;
+	width: 100%;
+	position: absolute;
+	top: 42px;
+	left: 0;
+	z-index: 99;
+	background: #fff;
+}
+.c-garage-tor-menu div{
+	width: 100%;
+	float: left;
+}
+.c-garage-tor-menu .c-garage-stor{
+	text-align: center;
+	color:#000;
+}
+.c-garage-screen{
+	padding-left: 3%;
+	padding-bottom: 2%;
+}
+.c-garage-screen span{
+	font-size: 12px;
+	color: #ccc;
+}
+.c-screen-section input{
+	border: none;
+	background: #ccc;
+	line-height: 36px;
+	color: #000;
+	text-align: center;
+	width: 46%;
+	font-size: 1rem;
+}
+.c-screen-section small{
+	background: #ccc;
+	padding: 5px 12px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	font-size: 1rem;
+	margin-right: 5px;
+}
+.c-screen-section .c-item-action{
+	background: pink;
+	color: #fff;
+}
+.c-rmb-submit{
+	margin-top: 10px;
+}
+.c-rmb-submit span{
+	width:46%;
+	display: inline-block;
+	border: 1px solid #ccc;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 5px;
+}
+.c-rmb-submit span:nth-of-type(2){
+	background: red;
+	color: #fff;
+}
+.c-hr{
+	border-bottom:1px solid #ccc;
+	width: 100%;
+	margin-left: -3%;
+	margin-top: 10px;
+}
+/*//menu*/ 
+.menu{
+	width: 100%;
+	height: 60px;
+	line-height: 86px;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 99;
+	background: #fff;
+	box-shadow: 0px 0px 2px #000000;
+	font-size: 14px;
+}
+.menu ul li{
+	float: left;
+	width: 25%;
+	cursor: pointer;
+	position: relative;
+	color:#000;
+}
+.menu ul li:before{
+	content: '';
+	display: block;
+	line-height: 0 !important;
+	position: absolute;
+	top: 5px;
+	left: 35%;
+	background: url(../images/9006397801.jpg) no-repeat center center;
+	background-size: 200%;
+	width: 30px;
+	height: 30px;
+	background-clip: content-box;
+	border-radius: 50%;
+}
+.menu ul li.active{
+	color: red;
+}
+.module{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	left: 0;
+	top: 40px;
+	z-index: 8;
+}
+/*go home*/
+.goback:after{
+	content: 'H';
+	background: #00B7FF;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	border-radius: 50%;
+}
+
+/*car_find stylesheets*/
+.c-action-body{
+	background: url(/images/car_find_bg.jpg) no-repeat center center;
+	background-size: 100%;
+	background-clip: content-box;
+	width: 100%;
+	z-index: 9;
+	overflow: hidden;
+}
+.c-container-body .c-top-phone{
+	width: 100%;
+	height: 60px;
+	background: #C1C1C1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 8;
+}
+.c-container-body .c-top-phone:before{
+	content: '';
+	background: url(/images/call.png) no-repeat center center;
+	float: right;
+	width: 50px;
+	height: 50px;
+	background-size: 100%;
+	margin-right: 20px;
+	margin-top: 5px;
+}
+.c-action-body .c-backups{
+	width: 100%;
+	height: 30%;
+	position: relative;
+	top: 25%;
+	left: 0;
+}
+.c-action-body .c-backups ul{
+	width: 100%;
+	height: 120%;
+}
+.c-action-body .c-backups ul li{
+	width: 100%;
+	height: 40%;
+	color: white;
+}
+.c-action-body .c-backups ul li div{
+	float: left;
+}
+.c-action-body .c-backups ul li div:before{
+	content: 'A';
+	display: block;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background: white;
+	margin: 0 auto;
+	color: #000000;
+	line-height: 70px;
+}
+.c-action-body .c-backups ul li:nth-of-type(1) div{
+	margin: 0 auto;
+	float: none;
+	text-align: center;
+}
+.c-action-body .c-backups ul li:nth-of-type(2) div{
+	width: 50%;
+	text-align: center;
+}
+.c-action-body .c-backups ul li:nth-of-type(2) div:nth-of-type(1){
+	width: 50%;
+	text-align: center;
+}
+.c-action-body .c-backups ul li:nth-of-type(2) div:nth-of-type(2){
+	width: 50%;
+	text-align: center;
+}
+.c-action-body .c-backups ul li:nth-of-type(3) div{
+	width: 50%;
+	box-sizing: border-box;
+	text-align: center;
+}
+.c-action-body .c-backups ul li:nth-of-type(3) div:nth-of-type(1){
+	padding-left: 20%;
+}
+.c-action-body .c-backups ul li:nth-of-type(3) div:nth-of-type(2){
+	padding-right: 20%;
+}
+/*.c-action-body .c-backups ul li:nth-of-type(3) div:nth-of-type(1):before{
+	margin-left: 55%;
+}*/
+/*.c-action-body .c-backups ul li:nth-of-type(3) div:nth-of-type(2):before{
+	margin: 0 5% !important;
+}*/

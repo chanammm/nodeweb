@@ -1,113 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 
 	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>
 			<%= title %>
 		</title>
-		<link rel='stylesheet' href='/stylesheets/style.css' />
-		<style type="text/css">
-			body,
-			html {
-				position: absolute;
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				background: #000;
-				user-select: none;
+		<meta name="description" content="Engin KIZIL Web Site" />
+		<meta name="keywords" content="enginkizil, engin, kızıl, kizil, engin kızıl, web site, website" />
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<style>
+			body {
+				background: #48d2bd;
+				color: #fff;
+				font-family: 'Varela Round', sans-serif;
+				text-align: center;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
 			}
 			
-			canvas {
+			.container {
 				position: absolute;
-				width: 100%;
-				height: 100%;
-				user-select: none;
-				touch-action: none;
-				content-zooming: none;
+				top: 38%;
+				width: 95%;
+				min-width: 320px;
+				margin: -30px 0 0;
+			}
+			
+			.container h1 {
+				font-size: 36px;
+				margin-bottom: 15px;
+			}
+			
+			.container h1 a {
+				display: inline-block;
 				background: #000;
+				background: rgba(0, 0, 0, 0.05);
+				padding: 10px 15px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+				color: #fff;
+				text-decoration: none;
+				-webkit-transition: all .3s ease;
+				-moz-transition: all .3s ease;
+				-ms-transition: all .3s ease;
+				-o-transition: all .3s ease;
+				transition: all .3s ease;
+			}
+			
+			.container h1 a:hover {
+				background: rgba(0, 0, 0, 0.1);
+			}
+			
+			.container p {
+				margin-bottom: 30px;
+				color: #d6f2e4;
+				font-family: 'Proxima Nova', sans-serif;
+				font-size: 20px;
+			}
+			
+			.container .social-media ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.container .social-media ul li {
+				display: inline-block;
+				margin: 0 16px 0 0;
+				font-size: 14px;
+			}
+			
+			.container .social-media ul li:last-child {
+				margin: 0;
+			}
+			
+			.container .social-media ul li a {
+				display: block;
+				width: 16px;
+				color: #fff;
 			}
 		</style>
+
 	</head>
 
 	<body>
-		<canvas></canvas>
+		<div class="container">
+			<h1>
+			    <a href="/">dev.UIN8.com</a>
+			    <span>i</span>
+			    <span>s</span>
+			    <span>&nbsp;</span>
+			    <span>c</span>
+			    <span>o</span>
+			    <span>m</span>
+			    <span>i</span>
+			    <span>n</span>
+			    <span>g</span>
+			    <span>&nbsp;</span>
+			    <span>s</span>
+			    <span>o</span>
+			    <span>o</span>
+			    <span>n</span>
+			    <span>!</span>
+			  </h1>
+			<p>Please check back with us in the near future for updates.</p>
 
-		<script id="vertexShader" type="x-shader/x-vertex">
-			attribute vec2 aPosition; uniform vec2 uResolution; void main() { gl_Position = vec4(((aPosition / uResolution * 2.0) - 1.0) * vec2(1, -1), 0, 1); }
-		</script>
-
-		<script id="fragmentShader" type="x-shader/x-fragment">
-			precision highp float; uniform vec2 uResolution; uniform vec3 ue; uniform vec2 ucs; void main() { const float Z = 3.0; const float IZ = 1.0 / Z; vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution.xy) / min(uResolution.y, uResolution.x); float cn = ucs.x; float sn = ucs.y; float rx = uv.x; float ry = uv.y; float rz = 0.4; float d = 1.0; float ex = ue.x; float ey = ue.y; float ez = ue.z; float tx = ex; float ty = ey; float tz = ez; float gx = cn * rx + sn * rz; float gy = ry; float gz = cn * rz - sn * rx; rx = gx; ry = gz; rz = gy; gx = cn * rx + sn * rz; gy = ry; gz = cn * rz - sn * rx; rx = gx; ry = gz; rz = gy; float irx = 1.0 / rx; float iry = 1.0 / ry; float irz = 1.0 / rz; for (int i = 0; i
-			< 20; i++) { if (d < 0.0125) break; d *=I Z; tx=f ract(tx) * Z; ty=f ract(ty) * Z; tz=f ract(tz) * Z; float ix=f loor(tx); float iy=f loor(ty); float iz=f loor(tz); float j=m od(ix * ix + iy * iy + iz * iz, 4.0); if (j>= 2.0) { float fx = (rx > 0.0) ? 1.0 : 0.0; float fy = (ry > 0.0) ? 1.0 : 0.0; float fz = (rz > 0.0) ? 1.0 : 0.0; tx = (fx - fract(tx)) * irx; ty = (fy - fract(ty)) * iry; tz = (fz - fract(tz)) * irz; float n = tx; n = (ty
-				< n) ? ty : n; n=( tz < n) ? tz : n; ex +=r x * (n * d + 0.001); ey +=r y * (n * d + 0.001); ez +=r z * (n * d + 0.001); tx=e x; ty=e y; tz=e z; d=1 .0; } } ex -=u e.x; ey -=u e.y; ez -=u e.z; float c=( ex*ex + ey*ey + ez*ez); c=s n> 0.0 ? c : 0.1 / c; gl_FragColor = vec4(0.3 * sn * uv.x + c * 0.75, c * 0.5, c * 0.25, 1.0); }
-		</script>
-		<script type="text/javascript">
-			"use strict"; {
-				const canvas = document.querySelector("canvas");
-				let gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-				const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-				gl.shaderSource(vertexShader, document.getElementById("vertexShader").text);
-				gl.compileShader(vertexShader);
-				const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-				gl.shaderSource(fragmentShader, document.getElementById("fragmentShader").text);
-				gl.compileShader(fragmentShader);
-				const program = gl.createProgram();
-				gl.attachShader(program, vertexShader);
-				gl.attachShader(program, fragmentShader);
-				gl.linkProgram(program);
-				gl.useProgram(program);
-				const uResolution = gl.getUniformLocation(program, "uResolution");
-				const ue = gl.getUniformLocation(program, "ue");
-				const ucs = gl.getUniformLocation(program, "ucs");
-				const aPosition = gl.getAttribLocation(program, "aPosition");
-				const buffer = gl.createBuffer();
-				const resize = () => {
-					const WIDTH = (canvas.width = canvas.offsetWidth);
-					const HEIGHT = (canvas.height = canvas.offsetHeight);
-					gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-					gl.enableVertexAttribArray(aPosition);
-					gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
-					gl.bufferData(
-						gl.ARRAY_BUFFER,
-						new Float32Array([
-							0,
-							0,
-							WIDTH,
-							0,
-							0,
-							HEIGHT,
-							0,
-							HEIGHT,
-							WIDTH,
-							0,
-							WIDTH,
-							HEIGHT
-						]),
-						gl.STATIC_DRAW
-					);
-					gl.uniform2f(uResolution, WIDTH, HEIGHT);
-					gl.viewport(0, 0, WIDTH, HEIGHT);
-				};
-				window.addEventListener("resize", _ => resize(), false);
-				resize();
-				////////////////////////////////////////////////////////
-				let time = 8;
-				const update = () => {
-					requestAnimationFrame(update);
-					time += 0.01;
-					gl.uniform2f(ucs, Math.cos(time * 0.4), Math.sin(time * 0.4));
-					gl.uniform3f(
-						ue,
-						0.5 + Math.sin(time * 0.5) * 0.1,
-						0.5 + Math.cos(time * 0.47) * 0.1, -time * 0.3 + Math.sin(time * 0.3 - 0.01)
-					);
-					gl.drawArrays(gl.TRIANGLES, 0, 6);
-				};
-				update();
-			}
-		</script>
+		</div>
+		<div id="Copyright">
+	<a target="_blank" href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" style="position: fixed;bottom: 0;right: 0;color: #fff;"> 粤ICP备17071425号-1</a>
+</div>
 	</body>
 
 </html>
