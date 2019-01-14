@@ -4,41 +4,64 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var mongoose = require("mongoose");  //数据库服务
+var session = require("express-session");
+var MongoStore = require("connect-mongo")(session);
 
 //var routes = require('./config/routes');
 //默认路由
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var r = require('./routes/test');
-var x = require('./routes/colorpice');
-var car_index = require('./routes/car_index');
-var mbox = require('./routes/mbox');
-var active = require('./routes/test-active');
-var car_garage = require('./routes/car_garage');
-var car_find = require('./routes/car_find');
+var routes = require('./config/routes');
+
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
+// var r = require('./routes/test');
+// var x = require('./routes/colorpice');
+// var car_index = require('./routes/car_index');
+// var mbox = require('./routes/mbox');
+// var active = require('./routes/test-active');
+// var car_garage = require('./routes/car_garage');
+// var car_find = require('./routes/car_find');
+// var loading = require('./routes/loading');
 var app = express();
+
+//建立操作数据库
+//mongoose.connect("mongodb://localhost:27017/mongodb");
+mongoose.connect("mongodb://localhost:27017/mongodb");   //读取写入
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'htm');
 app.engine('.htm', require('ejs').renderFile);  
 
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+	secret:"45454",
+	store:new MongoStore({
+		url:'mongodb://localhost:27017/mongodb',   //链表地址
+		cookieSecret:'jdghjf',
+		db:'db',
+		host:'localhost'
+	})
+}))
 
+
+routes(app);
 //默认路由
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/test',r);
-app.use('/colorpice',x);
-app.use('/car_index',car_index);
-app.use('/mbox',mbox);
-app.use('/test-active',active);
-app.use('/car_garage',car_garage);
-app.use('/car_find',car_find);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+// app.use('/test',r);
+// app.use('/colorpice',x);
+// app.use('/car_index',car_index);
+// app.use('/mbox',mbox);
+// app.use('/test-active',active);
+// app.use('/car_garage',car_garage);
+// app.use('/car_find',car_find);
+// app.use('/loading',loading);
 //routes(app);
 
 // catch 404 and forward to error handler

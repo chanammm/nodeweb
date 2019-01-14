@@ -1,27 +1,23 @@
 // JavaScript Document
-var PluginUser = require('../plugin/user');
-var PluginBlog = require('../plugin/blog');
+var _modu = require('../plugin/__config');
 
 module.exports = function (app){
-
-	app.use(function (req, res, next){
-		var user = req.session.user;
-		if(user){
-			app.locals.user = user;
-		}else{
-			app.locals.user = user;
-		};
-		
-		next();
-	});
-
 
 	app.get('/', function (req, res, next){
 		res.render('index', { title: '首页' });
 	});
 	
-	//登录
-	app.get('/login', PluginUser.loginNo, PluginUser.login.get);
-	app.post('/login', PluginUser.login.post);
-
+	//执行 获取配置  
+	app.get('/__MUDO',_modu.__MUDO.get);
+	app.post('/__MUDO',_modu.__MUDO.postData);
+	
+	//登陆动画canvas
+	app.get('/test-active',_modu.__SignaTures.views);
+	
+	//服务器请求
+	app.get('/mbox',_modu.__mbox.views);
+	
+	//测试请求数据
+	app.post('/__yellow',_modu.__yellow.post);
+	
 }
