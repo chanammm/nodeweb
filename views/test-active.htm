@@ -426,6 +426,9 @@ $(function(){
 <script type="text/javascript">
 	;(function(window){
 			function Dotline(option){
+				if(window.innerWidth < "640"){
+					return false;
+				};
 				this.opt = this.extend({
 					dom:'',//画布id
 					cw:200,//画布宽

@@ -196,5 +196,82 @@ function cnzmg6() {
     cnzmg.init();
 }
 </script>
+<script type="text/javascript">
+	window.onload = function(){
+		window.performance.getEntries().forEach(function(res){
+			var jsondata = {
+				connectStart:res.connectStart,  //TCP 连接启动
+				connectEnd:res.connectEnd,		//TCP 连接关闭
+				decodedBodySize:res.decodedBodySize,  //解码体大小
+				domainLookupEnd:res.domainLookupEnd,	//dns 域查找结束
+				domainLookupStart:res.domainLookupStart,	//域查找开始
+				duration:res.duration,						//期间
+				encodedBodySize:res.encodedBodySize,	//编码体大小
+				entryType:res.entryType,			//入口类型
+				fetchStart:res.fetchStart,			//取开始
+				initiatorType:res.initiatorType,	//引发剂类型
+				name:res.name,						//名称
+				nextHopProtocol:res.nextHopProtocol,	//下一跳协议
+				redirectEnd:res.redirectEnd,			//重定向端
+				redirectStart:res.redirectStart,		//重定向启动
+				requestStart:res.requestStart,			//请求启动
+				responseEnd:res.responseEnd,			//响应端
+				responseStart:res.responseStart,		//白屏时间 响应开始
+				secureConnectionStart:res.secureConnectionStart,	//安全连接启动
+				serverTiming:res.serverTiming,		//服务器定时
+				startTime:res.startTime,			//开始时间
+				transferSize:res.transferSize,		//传输大小
+				workerStart:res.workerStart,			//工人开始
+				domComplete:window.performance.timing.domComplete,  //解析dom树耗时
+				domInteractive:window.performance.timing.domInteractive,  //解析dom树耗时
+				domContentLoadedEventEnd :window.performance.timing.domContentLoadedEventEnd, //domready时间 
+				navigationStart:window.performance.timing.navigationStart,  //domready时间 
+				loadEventEnd:window.performance.timing.loadEventEnd,  //onload时间
+				navigationStart:window.performance.timing.navigationStart  //onload时间
+			};
+			jQuery.ajax({
+				url:'viewpost',
+				type:'post',
+				dataType:'json',
+				data:jsondata
+			})
+		});
+	}
+//	window.performance.timing.forEach(function(res){
+//			var jsondata = {
+//				connectStart:res.connectStart,
+//				connectEnd:res.connectEnd,
+//				decodedBodySize:res.decodedBodySize,
+//				domainLookupEnd:res.domainLookupEnd,
+//				domainLookupStart:res.domainLookupStart,
+//				duration:res.duration,
+//				encodedBodySize:res.encodedBodySize,
+//				entryType:res.entryType,
+//				fetchStart:res.fetchStart,
+//				initiatorType:res.initiatorType,
+//				name:res.name,
+//				nextHopProtocol:res.nextHopProtocol,
+//				redirectEnd:res.redirectEnd,
+//				redirectStart:res.redirectStart,
+//				requestStart:res.requestStart,
+//				responseEnd:res.responseEnd,
+//				responseStart:res.responseStart,
+//				secureConnectionStart:res.secureConnectionStart,
+//				serverTiming:res.serverTiming,
+//				startTime:res.startTime,
+//				transferSize:res.transferSize,
+//				workerStart:res.workerStart
+//			};
+//			jQuery.ajax({
+//				url:'viewpost',
+//				type:'post',
+//				dataType:'json',
+//				data:jsondata
+//			})
+//			.done(function(res){
+//				console.log(res);
+//			})
+//		});
+</script>
 </body>
 </html>

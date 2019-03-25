@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="background:rgb(226, 220, 220);">
+    <div class="coll-hero-anim-ctn">
+        <div class="coll-hero-anim-inner"
+            style="padding-top: 0px; transform: translate3d(0px, 0px, 0px) rotate(0.0001deg); transform-style: preserve-3d; backface-visibility: hidden; pointer-events: none;">
+            <div class="coll-hero-anim-object zindex1" data-depth="0.1"
+                style="transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: relative; display: block; left: 0px; top: 0px;">
+                <img class="coll-hero-anim-image" src="/images/icon/img-anim-zindex1.svg" alt=""></div>
+            <div class="coll-hero-anim-object zindex2" data-depth="0.3"
+                style="transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;">
+                <img class="coll-hero-anim-image" src="/images/icon/img-anim-zindex2.svg" alt=""></div>
+            <div class="coll-hero-anim-object zindex3" data-depth="0.6"
+                style="transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;">
+                <img class="coll-hero-anim-image" src="/images/icon/img-anim-zindex3.svg" alt=""></div>
+        </div>
+    </div>
+
+    <script>
+        var cla = document.querySelector('.coll-hero-anim-inner');
+        // cla[0].children.item(() => {
+        //     [].forEach((e, index) => {
+        //         return cla[0].children.length - index;
+        //     });
+        // })
+        cla.childNodes[0].onclick = function (e) {
+            alert(1);
+            cla[0].children.item(1).style.transform = 'translate3d(0px, 100px, 0px)';
+            cla[0].children.item(2).style.transform = 'translate3d(100px, 0px, 0px)';
+            cla[0].children.item(3).style.transform = 'translate3d(0px, 0px, 100px)';
+        }
+    </script>
+</body>
+
+</html>

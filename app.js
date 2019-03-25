@@ -31,7 +31,7 @@ mongoose.connect("mongodb://localhost:27017/mongodb");   //读取写入
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'htm');
-app.engine('.htm', require('ejs').renderFile);  
+app.engine('.htm', require('ejs').renderFile);
 
 
 app.use(logger('dev'));

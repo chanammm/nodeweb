@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+  <defs>
+    <linearGradient id="3-a" x1="0%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#CCD9DF"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-b" x1="0%" y1="0%" y2="65.601%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-c" x1="36.733%" x2="36.733%" y1="0%" y2="80.824%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#CCD9DF"/>
+    </linearGradient>
+    <linearGradient id="3-d" x1="-106.167%" y1="-90.004%" y2="65.601%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-e" x1="0%" x2="11.06%" y1="33.52%" y2="60.032%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#CCD9DF"/>
+    </linearGradient>
+    <linearGradient id="3-f" x1="100%" x2="0%" y1="26.416%" y2="58.641%">
+      <stop offset="0%" stop-color="#CCD9DF"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-g" x1="25.87%" y1="279.368%" y2="67.971%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-h" x1="75.054%" x2="-22.137%" y1="0%" y2="146.772%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-i" x1="238.408%" x2="140.236%" y1="-10.092%" y2="155.791%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-j" x1="-100.236%" x2="50%" y1="-133.222%" y2="61.402%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-k" x1="89.436%" x2="-77.053%" y1="17.786%" y2="-30.179%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-l" x1="119.923%" x2="0%" y1="82.09%" y2="100%">
+      <stop offset="0%" stop-color="#EFF3F5"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-m" x1="-234.001%" x2="72.12%" y1="116.879%" y2="0%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-n" x1="-43.996%" x2="154.183%" y1="100%" y2="39.927%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-o" x1="58.707%" y1="346.919%" y2="-104.134%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-p" x1="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#CCD9DF"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+    <linearGradient id="3-q" x1="231.054%" x2="22.798%" y1="201.099%" y2="0%">
+      <stop offset="0%" stop-color="#072333"/>
+      <stop offset="100%" stop-color="#8FA6B2"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon fill="url(#3-a)" fill-rule="nonzero" points="584 242 606 242 606 304 595 297 584 304"/>
+    <text fill="url(#3-b)" font-family="Roboto-Bold, Roboto" font-size="18" font-weight="bold">
+      <tspan x="465" y="344"># hello wo_</tspan>
+    </text>
+    <g transform="rotate(-35 508.375 -781.171)">
+      <polygon fill="url(#3-c)" points="15.165 0 45.117 3.756 29.572 17.278 0 12.019"/>
+      <polygon fill="url(#3-d)" points="3.791 39.063 0 12.019 29.572 17.278 32.226 45.824"/>
+      <polygon fill="url(#3-e)" points="45.117 30.8 32.226 45.824 29.572 17.278 45.117 3.756"/>
+    </g>
+    <g fill-rule="nonzero" transform="translate(664.066 108)">
+      <polygon fill="url(#3-f)" points="30 19 67 43 26 63"/>
+      <polygon fill="url(#3-g)" points="55 70 67 43 26 63"/>
+      <polygon fill="url(#3-h)" points="30 19 67 43 62 3"/>
+      <polygon fill="url(#3-i)" points="76 36 67 43 62 3"/>
+      <polygon fill="url(#3-j)" points="76 36 67 43 55 70"/>
+      <polygon fill="url(#3-k)" points="30 19 19 0 62 3"/>
+      <polygon fill="url(#3-l)" points="30 19 19 0 0 34"/>
+      <polygon fill="url(#3-m)" points="30 19 26 63 0 34"/>
+      <polygon fill="url(#3-n)" points="16 65 26 63 0 34"/>
+      <polygon fill="url(#3-o)" points="16 65 26 63 55 70"/>
+    </g>
+    <g transform="rotate(-131 208.436 132.042)">
+      <path fill="url(#3-p)" d="M2.22540869,106.122833 L-4.54747351e-13,3.00483092 L10.5273011,3.00483092 L12.7510363,106.04529 C12.7521498,106.071061 12.7527098,106.096909 12.7527098,106.122833 C12.7527098,107.804524 10.3960932,109.167805 7.48905924,109.167805 C4.58202531,109.167805 2.22540869,107.804524 2.22540869,106.122833 Z"/>
+      <ellipse cx="5.264" cy="3.005" fill="url(#3-q)" rx="5.264" ry="3.005"/>
+    </g>
+  </g>
+</svg>

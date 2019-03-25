@@ -1,0 +1,43 @@
+<% include common/header.htm %>
+	
+	<!--this is body-->
+	<style>
+		body{
+			background: #00B7FF;
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			text-align: center;
+			color: #fff;
+			font-size: 5rem;
+		}
+	</style>
+	
+	<div class="box" id="box">
+		BOX
+	</div>
+	
+	<script type="text/javascript">
+		var xml = new XMLHttpRequest();
+		xml.open('post','ChartGood',false);
+		xml.send('?name=cnzmg');
+		window.onload = function(){
+			let i = document.getElementById('box'), h = window.innerHeight;
+			i.style.margin = `${parseInt(h / 2 - i.offsetHeight)}px 0`;
+			function asyncJs(e){
+				e = e || {};
+				return new Promise((fn) => {
+					setTimeout(fn,e,{
+						name:'cnzmg',
+						age:23
+					})
+				})
+			}
+			asyncJs(5000).then((e) => {
+				console.log(e);
+			})
+		}
+	</script>
+	
+<% include common/footer.htm %>

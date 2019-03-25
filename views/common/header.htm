@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title><%= title %></title>
+	</head>
+	<body>
+	<!--this is header-->
+		
+		<script type="text/javascript">
+			function cloneShallow(source){
+				var target = {};
+				for (var key in source){
+					if(Object.prototype.hasOwnProperty.call(source,key)){
+						target[key] = source[key];
+					}
+				}
+				return target;
+			};
+			
+			//测试用例
+			var a = {
+				name:'cnzmg',
+				book:{
+					title:'this is title',
+					price:'45'
+				},
+				a1:undefined,
+				a2:null,
+				a3:123
+			}
+			var b = cloneShallow(a);  //浅拷贝
+			a.name = "a ===== 高级前端";
+			a.book.price = "a ===== 55";
+			
+			//简单的深拷贝
+			function cloneDeelp(source){
+				var target = {};
+				for (var key in source){
+					if(Object.prototype.hasOwnProperty.call(source,key)){
+						if(typeof source[key] === "object"){
+							target[key] = cloneDeelp(source[key]); //重点
+						}else{
+							target[key] = source[key];
+						}
+					}
+				}
+				return target;
+			}
+			var b = cloneDeelp(a);
+			a.name = "b ===== 高级前端";
+			a.book.price = "b ===== 55";
+			console.log(b);
+			console.log(a);
+			
+			/*/	
+				存在问题
+				1、没有对参数进行校验  传入null 的时候应当返回null 而不是 {}
+				2、对于对象的判断不够严谨  typeof null  === ‘object’
+				3、没有数组兼容
+			/*/
+			
+		</script>
+	
