@@ -166,3 +166,12 @@ module.exports.partner = {
 		res.render('technology/tx_partner');
 	}
 }
+
+//mongo
+module.exports.mongo = {
+	view:function(req,res,next){
+		res.render('technology/mongo',{
+			title:'this is mongo'
+		});
+	}
+}

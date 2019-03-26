@@ -1,0 +1,50 @@
+<title><%= title %></title>
+<div id="dom"></div>
+<style>
+    body {
+        background: olivedrab
+    }
+
+    ul {
+        list-style: none
+    }
+
+    input {
+        color: #fff;
+        background: none
+    }
+</style>
+<script src="/plugin/app.js"></script>
+<script src="/plugin/configuraction.js"></script>
+<script>
+    let dom = createElementDom('ul', { class: 'list', id: 'dom' }, [
+        createElementDom('li', { class: 'item' }, ['cc']),
+        createElementDom('li', { class: 'item' }, ['cc']),
+        createElementDom('li', { class: 'item' }, ['cc']),
+        createElementDom('li', { class: 'item' }, ['cc']),
+        createElementDom('input', { class: 'input', placeholder: '请输入' }, ['1'])
+    ]);
+    let e = render(dom);
+    renderDom(e, document.getElementById('dom'))
+</script>
+
+<script>
+    //test 四则算法
+    function compare(a, b) {
+        let diff = a ^ b;
+        if (diff == 0) return 0;
+        diff = diff | (diff >> 1);
+        diff |= diff >> 2;
+        diff |= diff >> 4;
+        diff |= diff >> 8;
+        diff |= diff >> 16;
+        diff ^= diff >> 1;
+        return (a && diff) ? 1 : -1;
+}
+console.log(compare(1,2));
+console.log(compare(3,2));
+console.log(compare(300,2));
+console.log(compare(3000,2));
+console.log(compare(3000,3000));
+console.log(compare(3000,3001));
+</script>

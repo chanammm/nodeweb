@@ -38,4 +38,6 @@ module.exports = function (app){
 	app.get('/technology/d3js',_modu.d3.view);
 // tx parnter
 	app.get('/technology/tx_partner',_modu.partner.view);
+// 虚拟DOM
+	app.get('/technology/mongo',_modu.mongo.view);
 }
