@@ -1,4 +1,5 @@
 var Model_data = require('../model/__data');
+var request = require('request');
 
 const __config = require('../public/json/configuraction.json');
 module.exports.__MUDO = {
@@ -173,5 +174,42 @@ module.exports.mongo = {
 		res.render('technology/mongo',{
 			title:'this is mongo'
 		});
+	}
+}
+
+
+//ksx Analog interface
+module.exports.interface = {
+	get:function(req, res, next){
+		// get request
+		let open = 'http://rap2api.taobao.org/app/mock/164781/' + req.query.type;
+		
+		request({url: open,method: 'get',headers:{
+			'Content-Type': 'application/json'
+		}}, function (error, response, body) {
+			res.send({
+				code:200,
+				msg:'get request successful !',
+				b: JSON.parse(body),
+				e: JSON.parse(error)
+			})
+		})
+	},
+	post:function(req, res, next){
+		// post require http://rap2api.taobao.org/app/mock/164781/login
+		let open = 'http://rap2api.taobao.org/app/mock/164781/' + req.body.type;
+		let data = JSON.stringify(req.body);
+
+		request({url: open,method: 'POST',body: data,headers:{
+			// 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+			'Content-Type': 'application/json'
+		}}, function (error, response, body) {
+			res.send({
+				code:200,
+				msg:'post require successful',
+				b: JSON.parse(body),
+				e: JSON.parse(error)
+			})
+		})
 	}
 }

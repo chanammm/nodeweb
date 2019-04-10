@@ -40,4 +40,7 @@ module.exports = function (app){
 	app.get('/technology/tx_partner',_modu.partner.view);
 // 虚拟DOM
 	app.get('/technology/mongo',_modu.mongo.view);
+//模拟 咖速修 接口
+	app.get('/interface', _modu.interface.get);
+	app.post('/interface', _modu.interface.post);
 }

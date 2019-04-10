@@ -361,14 +361,14 @@ function render(dom){	  //虚拟DOM 转换 为DOM
 function setAttre(node, key, value){   //添加属性
 	switch(key){
 		case 'value':
-			if(node.tagName.toLowerCase() == "input" || node.tagName.toLowerCase() == "textarea"){
+			if(node.tagName.toLowerCase() == "input" || node.tagName.toLowerCase() == "textarea"){  //输入条件
 				node.value = value;
 			}else{
 				node.setAttribute(key, value);
 			};
 			break;
 		case 'style':
-			node.style.cssText = value;
+			node.style.cssText = value;  //样式条件
 			break;
 		default:
 			node.setAttribute(key, value);
