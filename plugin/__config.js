@@ -1,4 +1,5 @@
 var Model_data = require('../model/__data');
+var Model_wechat = require('../model/__wechat');
 var request = require('request');
 
 const __config = require('../public/json/configuraction.json');
@@ -209,6 +210,18 @@ module.exports.interface = {
 				msg:'post require successful',
 				b: JSON.parse(body),
 				e: JSON.parse(error)
+			})
+		})
+	}
+}
+
+//wechat 
+module.exports.wechat = {
+	post:function(req, res, next){
+		Model_wechat.find({}, function(err, op){
+			res.send({
+				code:200,
+				msg: op
 			})
 		})
 	}

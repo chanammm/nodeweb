@@ -43,4 +43,7 @@ module.exports = function (app){
 //模拟 咖速修 接口
 	app.get('/interface', _modu.interface.get);
 	app.post('/interface', _modu.interface.post);
+
+// 获取wechat api
+	app.get('/wechat', _modu.wechat.post);
 }
