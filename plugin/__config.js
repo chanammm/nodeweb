@@ -199,29 +199,37 @@ module.exports.interface = {
 	post:function(req, res, next){
 		// post require http://rap2api.taobao.org/app/mock/164781/login
 		let open = 'http://rap2api.taobao.org/app/mock/164781/' + req.body.type;
-		let data = JSON.stringify(req.body);
+		let data = JSON.stringify(req.body), code = Object;
 
-		request({url: open,method: 'POST',body: data,headers:{
-			// 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-			'Content-Type': 'application/json'
-		}}, function (error, response, body) {
-			res.send({
-				code:200,
-				msg:'post require successful',
-				b: JSON.parse(body),
-				e: JSON.parse(error)
+		try {
+			request({url: open,method: 'POST',body: data,headers:{
+				// 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				'Content-Type': 'application/json'
+			}}, function (error, response, body) {
+				code = {
+					code:200,
+					msg:'post require successful',
+					b: JSON.parse(body),
+					e: JSON.parse(error)
+				}
 			})
-		})
+		} catch (error) {
+			code = {
+				code:200,
+				msg:'post require Error'
+			}
+		}
+		res.send(code)
 	}
 }
 
 //wechat 
 module.exports.wechat = {
 	post:function(req, res, next){
-		Model_wechat.find({}, function(err, op){
+		Model_wechat.find({}, async function(err, e){
 			res.send({
 				code:200,
-				msg: op
+				msg: await e
 			})
 		})
 	}
