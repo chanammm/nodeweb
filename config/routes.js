@@ -46,4 +46,9 @@ module.exports = function (app){
 
 // 获取wechat api
 	app.get('/wechat', _modu.wechat.post);
+
+
+
+// 微信管理 api
+	app.get('/technology/_wechat',_modu._wechat.post);
 }

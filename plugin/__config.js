@@ -2,6 +2,12 @@ var Model_data = require('../model/__data');
 var Model_wechat = require('../model/__wechat');
 var request = require('request');
 
+const { Wechaty } = require('wechaty');
+const bot = new Wechaty({ name: 'cnzmg' });
+
+
+
+
 const __config = require('../public/json/configuraction.json');
 module.exports.__MUDO = {
     get:function(req,res,next){
@@ -231,6 +237,28 @@ module.exports.wechat = {
 				code:200,
 				msg: await e
 			})
+		})
+	}
+}
+
+//wechat api
+module.exports._wechat = {
+	post: function(req,res){
+		let _qrcode;
+		// if(req.query.name == 'cnzmg' && req.query.pwd == 'cnzmg'){
+			bot.on('scan', qrcode => {
+				require('qrcode-terminal').generate(qrcode);
+				_qrcode = [
+						'https://api.qrserver.com/v1/create-qr-code/?data=',
+						encodeURIComponent(qrcode),
+					].join('');
+				console.log(_qrcode);
+				return _qrcode;
+			});
+			bot.start();
+		// }
+		res.send({
+			_qrcode: _qrcode
 		})
 	}
 }
