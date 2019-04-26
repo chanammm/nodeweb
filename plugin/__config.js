@@ -243,21 +243,19 @@ module.exports.wechat = {
 
 //wechat api
 module.exports._wechat = {
-	post: function(req,res){
+	post: async function(req,res){
 		let _qrcode;
 		// if(req.query.name == 'cnzmg' && req.query.pwd == 'cnzmg'){
-			bot.on('scan', qrcode => {
-				require('qrcode-terminal').generate(qrcode);
-				_qrcode = [
-						'https://api.qrserver.com/v1/create-qr-code/?data=',
-						encodeURIComponent(qrcode),
-					].join('');
-				console.log(_qrcode);
+			const _c = await bot.on('scan', qrcode => {
+				_qrcode = ['https://api.qrserver.com/v1/create-qr-code/?data=',encodeURIComponent(qrcode),].join('');
 				return _qrcode;
-			});
+			})
+			bot.on('login', user => {
+				console.log(user);
+			})
 			bot.start();
 		// }
-		res.send({
+		await res.send({
 			_qrcode: _qrcode
 		})
 	}
