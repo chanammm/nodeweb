@@ -1,0 +1,105 @@
+<% include ../common/header.htm %>
+
+<script src="../javascripts/echarts.min.js"></script>
+<style>
+    body{
+        background: #f3f3f3;
+    }
+    .btn{
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        text-align: center;
+        background: #fff100;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+        z-index: 99999;
+    }
+</style>
+
+<div style="position:absolute;top:0;left:0;z-index:666666;">
+    <%= data.code.Question_1 %>
+</div>
+
+<div class="btn" id="btn">导出文档</div>
+<div id="vCharts" style="height:800px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('vCharts'));
+    var option = {
+            legend: {},
+            tooltip: {
+                trigger: 'axis',
+                showContent: false
+            },
+            dataset: {
+                source: (() => {
+                    return [
+                        ['product','第一题', '第二题', '第三题', '第四题', '第五题', '第六题', '第七题', '第八题', '第九题', '第十题', '第十一题', '第十二题', '第十三题', '第十四题', '第十五题'],
+                        ['A', 141.2, 310.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 183.8, 198.7, 220.6, 36.9, 36.9],
+                        ['B', 241.3, 302.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 183.8, 198.7, 2.20, 369, 236.9],
+                        ['C', 341.4, 330.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 183.8, 19.8, 220.6, 369, 361.9],
+                        ['D', 441.5, 304.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 18.8, 198.7, 220.6, 369, 136.9],
+                        ['E', 41.5, 304.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 18.8, 198.7, 220.6, 369, 136.9],
+                        ['其他', 541.6, 350.4, 65.1, 53.3, 83.8, 98.7, 11.1, 130.4, 165.1, 153.3, 183.8, 198.7, 220.6, 369, 6.9]
+                    ]
+                })()
+            },
+            xAxis: { type: 'category' },
+            yAxis: { gridIndex: 0 },
+            grid: { top: '55%' },
+            series: [
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+                {
+                    type: 'pie',
+                    id: 'pie',
+                    radius: '30%',
+                    center: ['50%', '25%'],
+                    label: {
+                        formatter: '{b}: {@第一题} ({d}%)'
+                    },
+                    encode: {
+                        itemName: 'product',
+                        value: '第一题',
+                        tooltip: '第一题'
+                    }
+                }
+            ]
+        };
+
+        myChart.on('updateAxisPointer', function (event) {
+            var xAxisInfo = event.axesInfo[0];
+            if (xAxisInfo) {
+                var dimension = xAxisInfo.value + 1;
+                myChart.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                        },
+                        encode: {
+                            value: dimension,
+                            tooltip: dimension
+                        }
+                    }
+                });
+            }
+        });
+       myChart.setOption(option);  //初始化charts 函数
+
+       document.getElementById('btn').addEventListener('click', function(e){
+            let _xml = new XMLHttpRequest();
+            _xml.open('get', '//192.168.0.168:8012/technology/Squestionnaire', false);
+            _xml.send(null);
+            console.log(_xml.responseText)
+       })
+</script>
+
+
+<% include ../common/footer.htm %>

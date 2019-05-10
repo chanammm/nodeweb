@@ -278,6 +278,8 @@
         <div class="declear"></div>
     </div>
     <div class="clear"></div>
+
+    <img id="qrcode" src="" />
 </div>
 
 
@@ -337,32 +339,48 @@
 </script>
 
 <script>
-    function arr(...array) {
-        console.log(...array);
-    }
-    arr([3, 2, 1, 4, 5]);
-
     function New(){
         return new XMLHttpRequest();
     }
 
-    var xml = New();
-    xml.open("post",'//192.168.0.168:8012/interface',true);
-    xml.setRequestHeader("CONTENT-TYPE", "application/json");
-    xml.send(JSON.stringify({type:'login',name:'cnzmg',pwd:'cnzmg'}));
-    console.log(xml.responseText);
+    // var xml = New();
+    // xml.open("post",'//192.168.0.168:8012/interface',true);
+    // xml.setRequestHeader("CONTENT-TYPE", "application/json");
+    // xml.send(JSON.stringify({type:'login',name:'cnzmg',pwd:'cnzmg'}));
+    // console.log(xml.responseText);
 
-    var xx = New();
-    xx.open("get",'//192.168.0.168:8012/interface?type=machine_list',true);
-    xx.setRequestHeader("CONTENT-TYPE", "application/json");
-    xx.send(null);
-    console.log(xx.responseText);
+    // var xx = New();
+    // xx.open("get",'//192.168.0.168:8012/interface?type=machine_list',true);
+    // xx.setRequestHeader("CONTENT-TYPE", "application/json");
+    // xx.send(null);
+    // console.log(xx.responseText);
+
+
+    // var ml = New();
+    // ml.open("post",'//192.168.0.168:8012/technology/_wechat',false);
+    // ml.setRequestHeader("CONTENT-TYPE", "application/json");
+    // ml.send(JSON.stringify({type:'login',name:'cnzmg',pwd:'cnzmg'}));
+    // JSON.parse(ml.responseText)._qrcode.forEach(element => {
+    //     document.getElementById('qrcode').setAttribute('src' , element.__qrcode);
+    // });
+
+    var xml = New();
+    xml.open("post",'//192.168.0.168:8012/technology/questionnaire',false);
+    xml.setRequestHeader("CONTENT-TYPE", "application/json");
+    xml.send(JSON.stringify({
+            question : ['A','B','C','D','E','A','B','A','A','A','A','A','A','A','A'],
+            YmUserId: 891,
+            YmUserToken: 'joasndlaksndaqwrpkqtpkq2w'
+    }));
+    console.log(JSON.parse(xml.responseText));
+
+    
 </script>
 
 
 
 
-<script>
+<!-- <script>
     var obg = [
         { id: 1, parent: null },
         { id: 2, parent: 1 },
@@ -401,7 +419,7 @@
 
 
 
-</script>
+</script> -->
 
 
 <!-- <script src="http://www.uin8.com/javascripts/vconsole.min.js"></script> -->

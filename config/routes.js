@@ -41,14 +41,23 @@ module.exports = function (app){
 // 虚拟DOM
 	app.get('/technology/mongo',_modu.mongo.view);
 //模拟 咖速修 接口
-	app.get('/interface', _modu.interface.get);
-	app.post('/interface', _modu.interface.post);
-
-// 获取wechat api
-	app.get('/wechat', _modu.wechat.post);
+//	app.get('/interface', _modu.interface.get);
+//	app.post('/interface', _modu.interface.post);
+//
+//// 获取wechat api
+//	app.get('/wechat', _modu.wechat.post);
 
 
 
 // 微信管理 api
-	app.get('/technology/_wechat',_modu._wechat.post);
+//	app.get('/technology/_wechat',_modu._wechat.get);
+//	app.post('/technology/_wechat',_modu._wechat.post);
+
+// 问卷调查
+	app.post('/technology/questionnaire',_modu.questionnaire.post);
+	app.get('/technology/questionnaire',_modu.questionnaire.get);
+
+// 问卷导出
+	app.get('/technology/Squestionnaire',_modu.Squestionnaire.get);
+
 }
