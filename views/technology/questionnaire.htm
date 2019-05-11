@@ -19,13 +19,44 @@
     }
 </style>
 
-<div style="position:absolute;top:0;left:0;z-index:666666;">
-    <%= data.code.Question_1 %>
+<div id="_html" style="display:none;">
+    <%= data.code.Question %>
 </div>
-
 <div class="btn" id="btn">导出文档</div>
 <div id="vCharts" style="height:800px;"></div>
-<script type="text/javascript">
+<script type="text/javascript" defer>
+    let _code = {},_type = {},_xm = JSON.parse(document.getElementById('_html').innerHTML);
+    for(let i = 1; i < 16; i ++){
+        let _minA = 0,_minB = 0,_minC = 0,_minD = 0,_minE = 0,_minT = 0;
+        for(let j = 0; j < _xm.length; j ++){
+            _type['Question_' + i] = [];
+            _type['Question_' + i].push((()=>{
+                switch(_xm[j]['Question_' + i]){
+                    case 'A':
+                        _minA = parseInt(_minA + 1);
+                        break;
+                    case 'B':
+                        _minB = parseInt(_minB + 1);
+                        break;
+                    case 'C':
+                        _minC = parseInt(_minC + 1);
+                        break;
+                    case 'D':
+                        _minD = parseInt(_minD + 1);
+                        break;
+                    case 'E':
+                        _minE = parseInt(_minE + 1);
+                        break;
+                    default:
+                        _minT = parseInt(_minT + 1);
+
+                }
+                return {
+                    _minA,_minB,_minC,_minD,_minE,_minT
+                }
+            })());
+        }
+    }
     var myChart = echarts.init(document.getElementById('vCharts'));
     var option = {
             legend: {},
@@ -37,12 +68,12 @@
                 source: (() => {
                     return [
                         ['product','第一题', '第二题', '第三题', '第四题', '第五题', '第六题', '第七题', '第八题', '第九题', '第十题', '第十一题', '第十二题', '第十三题', '第十四题', '第十五题'],
-                        ['A', 141.2, 310.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 183.8, 198.7, 220.6, 36.9, 36.9],
-                        ['B', 241.3, 302.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 183.8, 198.7, 2.20, 369, 236.9],
-                        ['C', 341.4, 330.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 183.8, 19.8, 220.6, 369, 361.9],
-                        ['D', 441.5, 304.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 18.8, 198.7, 220.6, 369, 136.9],
-                        ['E', 41.5, 304.4, 65.1, 53.3, 83.8, 98.7, 141.1, 130.4, 165.1, 153.3, 18.8, 198.7, 220.6, 369, 136.9],
-                        ['其他', 541.6, 350.4, 65.1, 53.3, 83.8, 98.7, 11.1, 130.4, 165.1, 153.3, 183.8, 198.7, 220.6, 369, 6.9]
+                        ['A', _type.Question_1[0]._minA, _type.Question_2[0]._minA, _type.Question_3[0]._minA, _type.Question_4[0]._minA, _type.Question_5[0]._minA, _type.Question_6[0]._minA, _type.Question_7[0]._minA, _type.Question_8[0]._minA, _type.Question_9[0]._minA, _type.Question_10[0]._minA, _type.Question_11[0]._minA, _type.Question_12[0]._minA, _type.Question_13[0]._minA, _type.Question_14[0]._minA, _type.Question_15[0]._minA],
+                        ['B', _type.Question_1[0]._minB, _type.Question_2[0]._minB, _type.Question_3[0]._minB, _type.Question_4[0]._minB, _type.Question_5[0]._minB, _type.Question_6[0]._minB, _type.Question_7[0]._minB, _type.Question_8[0]._minB, _type.Question_9[0]._minB, _type.Question_10[0]._minB, _type.Question_11[0]._minB, _type.Question_12[0]._minB, _type.Question_13[0]._minB, _type.Question_14[0]._minB, _type.Question_15[0]._minB],
+                        ['C', _type.Question_1[0]._minC, _type.Question_2[0]._minC, _type.Question_3[0]._minC, _type.Question_4[0]._minC, _type.Question_5[0]._minC, _type.Question_6[0]._minC, _type.Question_7[0]._minC, _type.Question_8[0]._minC, _type.Question_9[0]._minC, _type.Question_10[0]._minC, _type.Question_11[0]._minC, _type.Question_12[0]._minC, _type.Question_13[0]._minC, _type.Question_14[0]._minC, _type.Question_15[0]._minC],
+                        ['D', _type.Question_1[0]._minD, _type.Question_2[0]._minD, _type.Question_3[0]._minD, _type.Question_4[0]._minD, _type.Question_5[0]._minD, _type.Question_6[0]._minD, _type.Question_7[0]._minD, _type.Question_8[0]._minD, _type.Question_9[0]._minD, _type.Question_10[0]._minD, _type.Question_11[0]._minD, _type.Question_12[0]._minD, _type.Question_13[0]._minD, _type.Question_14[0]._minD, _type.Question_15[0]._minD],
+                        ['E', _type.Question_1[0]._minE, _type.Question_2[0]._minE, _type.Question_3[0]._minE, _type.Question_4[0]._minE, _type.Question_5[0]._minE, _type.Question_6[0]._minE, _type.Question_7[0]._minE, _type.Question_8[0]._minE, _type.Question_9[0]._minE, _type.Question_10[0]._minE, _type.Question_11[0]._minE, _type.Question_12[0]._minE, _type.Question_13[0]._minE, _type.Question_14[0]._minE, _type.Question_15[0]._minE],
+                        ['其他', _type.Question_1[0]._minT, _type.Question_2[0]._minT, _type.Question_3[0]._minT, _type.Question_4[0]._minT, _type.Question_5[0]._minT, _type.Question_6[0]._minT, _type.Question_7[0]._minT, _type.Question_8[0]._minT, _type.Question_9[0]._minT, _type.Question_10[0]._minT, _type.Question_11[0]._minT, _type.Question_12[0]._minT, _type.Question_13[0]._minT, _type.Question_14[0]._minT, _type.Question_15[0]._minT]
                     ]
                 })()
             },
@@ -94,11 +125,8 @@
        myChart.setOption(option);  //初始化charts 函数
 
        document.getElementById('btn').addEventListener('click', function(e){
-            let _xml = new XMLHttpRequest();
-            _xml.open('get', '//192.168.0.168:8012/technology/Squestionnaire', false);
-            _xml.send(null);
-            console.log(_xml.responseText)
-       })
+            window.location = '//uin8.com/technology/Squestionnaire'
+       });
 </script>
 
 

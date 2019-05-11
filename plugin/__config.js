@@ -8,6 +8,7 @@ var Model_questionnaire = require('../model/__xml');
 //const { Wechaty } = require('wechaty');
 //const bot = new Wechaty({ name: 'cnzmg' });
 
+var nodeExcel = require('excel-export');  //引入excel 模块
 
 
 
@@ -268,17 +269,16 @@ module.exports.mongo = {
 
 module.exports.questionnaire = {
 	get:async function(req, res, next){
-		Model_questionnaire.aggregate([{$group : {_id : {name: "$Question_1", name1: "$Question_2"}, count : {$sum : 1}}}]).exec((err, data) => {
-			console.log(data)
-		});
-		res.render('technology/questionnaire',{
-			title: '问卷统计',
-			data:{
-				msg: "Request type 'Method POST'",
-				code: {
-					Question_1: 121
+		Model_questionnaire.find({}, function(err, data){
+			res.render('technology/questionnaire',{
+				title: '问卷统计',
+				data:{
+					msg: "Request type 'Method POST'",
+					code: {
+						Question: JSON.stringify(data)
+					}
 				}
-			}
+			})
 		})
 	},
 	post:function(req, res, next){
@@ -288,6 +288,7 @@ module.exports.questionnaire = {
 		})
 		postData['YmUserId'] = req.body.YmUserId;
 		postData['YmUserToken'] = req.body.YmUserToken;
+		
 		postData['DataTime'] = new Date().getTime();
 
 		Model_questionnaire.find({YmUserId: req.body.YmUserId}, function(err, user){
@@ -338,10 +339,35 @@ module.exports.questionnaire = {
 //导出 问卷
 module.exports.Squestionnaire = {
 	get: function(req, res, next){
-		Model_questionnaire.aggregate([{$group : {_id : "$Question_1", num_tutorial : {$sum : 1}}}]).exec((err, data) => {
-			res.send({
-				message: data
-			})
+		var conf = {};//创建一个写入格式map，其中cols(表头)，rows(每一行的数据);
+		var cols = ['第一题', '第二题', '第三题', '第四题', '第五题', '第六题', '第七题', '第八题', '第九题', '第十题', '第十一题', '第十二题', '第十三题', '第十四题', '第十五题'];//手动创建表头中的内容
+		conf.cols = [];//在conf中添加cols
+ 
+		for (var i = 0; i < cols.length; i++) {
+			var tits = {};//创建表头数据所对应的类型,其中包括 caption内容 type类型
+			tits.caption = cols[i];//添加内容
+			tits.type = 'string';//添加对应类型，这类型对应数据库中的类型，入number，data但一般导出的都是转换为string类型的
+			conf.cols.push(tits);//将每一个表头加入cols中
+		}
+		Model_questionnaire.find({}, function (err, data) {//根据需求查询想要的字段
+			var tows = ['Question_1', 'Question_2', 'Question_3', 'Question_4', 'Question_5', 'Question_6', 'Question_7', 'Question_8', 'Question_9', 'Question_10', 'Question_11', 'Question_12', 'Question_13', 'Question_14', 'Question_15'];//创建一个和表头对应且名称与数据库字段对应数据，便于循环取出数据
+			var datas = [];//用于承载数据库中的数据
+			let towsLen = tows.length
+			let dataLen = data.length
+			for (var i = 0; i < dataLen; i++) {//循环数据库得到的数据，因为取出的数据格式为
+				//[{"id" : "101010100","provinceZh" : "北京","leaderZh" : "北京","cityZh" : "北京","cityEn" : "beijing"},{…………},{…………}]
+				let row = [];//用来装载每次得到的数据
+				for (let j = 0; j < towsLen; j++) {//内循环取出每个
+					row.push(data[i][tows[j]].toString());//row.push((data[i].tows[j]).toString());两种形式都是相同的
+				}
+				datas.push(row);//将每一个{ }中的数据添加到承载中
+			}
+			conf.rows = datas;//将所有行加入rows中
+			var result = nodeExcel.execute(conf);//将所有数据写入nodeExcel中
+			res.setHeader('Content-Type', 'application/vnd.openxmlformats');//设置响应头
+			//设置下载文件命名 支持的excel文件类有.xlsx .xls .xlsm .xltx .xltm .xlsb .xlam等
+			res.setHeader("Content-Disposition", "attachment; filename=Questionnaire_"+ new Date().getTime() +".xlsx");
+			res.end(result, 'binary');//将文件内容传入
 		});
 	}
 }

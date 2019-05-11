@@ -19,6 +19,7 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "excel-export": "^0.5.1",
     "wechaty": "^0.22.6"
   }
 }
