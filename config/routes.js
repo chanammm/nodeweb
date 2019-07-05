@@ -60,4 +60,8 @@ module.exports = function (app){
 // 问卷导出
 	app.get('/technology/Squestionnaire',_modu.Squestionnaire.get);
 
+	
+// 问卷导出
+	app.get('/error',_modu.getAjaxError.get);
+	app.post('/error',_modu.getAjaxError.post);
 }

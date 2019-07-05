@@ -17,15 +17,24 @@
         cursor: pointer;
         z-index: 99999;
     }
+    ._count{
+        position: absolute;
+        top: 10px;
+        left: 20px;
+    }
 </style>
 
 <div id="_html" style="display:none;">
     <%= data.code.Question %>
 </div>
+<div id="_count">
+
+</div>
 <div class="btn" id="btn">导出文档</div>
 <div id="vCharts" style="height:800px;"></div>
 <script type="text/javascript" defer>
     let _code = {},_type = {},_xm = JSON.parse(document.getElementById('_html').innerHTML);
+    document.getElementById('_count').innerHTML = '参与总人数：' + _xm.length + ' 人';
     for(let i = 1; i < 16; i ++){
         let _minA = 0,_minB = 0,_minC = 0,_minD = 0,_minE = 0,_minT = 0;
         for(let j = 0; j < _xm.length; j ++){
@@ -58,75 +67,243 @@
         }
     }
     var myChart = echarts.init(document.getElementById('vCharts'));
+    // var option = {
+    //         legend: {},
+    //         tooltip: {
+    //             trigger: 'axis',
+    //             showContent: false
+    //         },
+    //         dataset: {
+    //             source: (() => {
+    //                 return [
+    //                     ['product','第一题', '第二题', '第三题', '第四题', '第五题', '第六题', '第七题', '第八题', '第九题', '第十题', '第十一题', '第十二题', '第十三题', '第十四题', '第十五题'],
+    //                     ['A', _type.Question_1[0]._minA, _type.Question_2[0]._minA, _type.Question_3[0]._minA, _type.Question_4[0]._minA, _type.Question_5[0]._minA, _type.Question_6[0]._minA, _type.Question_7[0]._minA, _type.Question_8[0]._minA, _type.Question_9[0]._minA, _type.Question_10[0]._minA, _type.Question_11[0]._minA, _type.Question_12[0]._minA, _type.Question_13[0]._minA, _type.Question_14[0]._minA, _type.Question_15[0]._minA],
+    //                     ['B', _type.Question_1[0]._minB, _type.Question_2[0]._minB, _type.Question_3[0]._minB, _type.Question_4[0]._minB, _type.Question_5[0]._minB, _type.Question_6[0]._minB, _type.Question_7[0]._minB, _type.Question_8[0]._minB, _type.Question_9[0]._minB, _type.Question_10[0]._minB, _type.Question_11[0]._minB, _type.Question_12[0]._minB, _type.Question_13[0]._minB, _type.Question_14[0]._minB, _type.Question_15[0]._minB],
+    //                     ['C', _type.Question_1[0]._minC, _type.Question_2[0]._minC, _type.Question_3[0]._minC, _type.Question_4[0]._minC, _type.Question_5[0]._minC, _type.Question_6[0]._minC, _type.Question_7[0]._minC, _type.Question_8[0]._minC, _type.Question_9[0]._minC, _type.Question_10[0]._minC, _type.Question_11[0]._minC, _type.Question_12[0]._minC, _type.Question_13[0]._minC, _type.Question_14[0]._minC, _type.Question_15[0]._minC],
+    //                     ['D', _type.Question_1[0]._minD, _type.Question_2[0]._minD, _type.Question_3[0]._minD, _type.Question_4[0]._minD, _type.Question_5[0]._minD, _type.Question_6[0]._minD, _type.Question_7[0]._minD, _type.Question_8[0]._minD, _type.Question_9[0]._minD, _type.Question_10[0]._minD, _type.Question_11[0]._minD, _type.Question_12[0]._minD, _type.Question_13[0]._minD, _type.Question_14[0]._minD, _type.Question_15[0]._minD],
+    //                     ['E', _type.Question_1[0]._minE, _type.Question_2[0]._minE, _type.Question_3[0]._minE, _type.Question_4[0]._minE, _type.Question_5[0]._minE, _type.Question_6[0]._minE, _type.Question_7[0]._minE, _type.Question_8[0]._minE, _type.Question_9[0]._minE, _type.Question_10[0]._minE, _type.Question_11[0]._minE, _type.Question_12[0]._minE, _type.Question_13[0]._minE, _type.Question_14[0]._minE, _type.Question_15[0]._minE],
+    //                     ['其他', _type.Question_1[0]._minT, _type.Question_2[0]._minT, _type.Question_3[0]._minT, _type.Question_4[0]._minT, _type.Question_5[0]._minT, _type.Question_6[0]._minT, _type.Question_7[0]._minT, _type.Question_8[0]._minT, _type.Question_9[0]._minT, _type.Question_10[0]._minT, _type.Question_11[0]._minT, _type.Question_12[0]._minT, _type.Question_13[0]._minT, _type.Question_14[0]._minT, _type.Question_15[0]._minT]
+    //                 ]
+    //             })()
+    //         },
+    //         xAxis: { type: 'category' },
+    //         yAxis: { gridIndex: 0 },
+    //         grid: { top: '55%' },
+    //         series: [
+    //             { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+    //             { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+    //             { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+    //             { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+    //             { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+    //             { type: 'line', smooth: true, seriesLayoutBy: 'row' },
+    //             {
+    //                 type: 'pie',
+    //                 id: 'pie',
+    //                 radius: '30%',
+    //                 center: ['50%', '25%'],
+    //                 label: {
+    //                     formatter: '{b}: {@第一题} ({d}%)'
+    //                 },
+    //                 encode: {
+    //                     itemName: 'product',
+    //                     value: '第一题',
+    //                     tooltip: '第一题'
+    //                 }
+    //             }
+    //         ]
+    //     };
+
+    //     myChart.on('updateAxisPointer', function (event) {
+    //         var xAxisInfo = event.axesInfo[0];
+    //         if (xAxisInfo) {
+    //             var dimension = xAxisInfo.value + 1;
+    //             myChart.setOption({
+    //                 series: {
+    //                     id: 'pie',
+    //                     label: {
+    //                         formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+    //                     },
+    //                     encode: {
+    //                         value: dimension,
+    //                         tooltip: dimension
+    //                     }
+    //                 }
+    //             });
+    //         }
+    //     });
     var option = {
-            legend: {},
-            tooltip: {
+            tooltip : {
                 trigger: 'axis',
-                showContent: false
-            },
-            dataset: {
-                source: (() => {
-                    return [
-                        ['product','第一题', '第二题', '第三题', '第四题', '第五题', '第六题', '第七题', '第八题', '第九题', '第十题', '第十一题', '第十二题', '第十三题', '第十四题', '第十五题'],
-                        ['A', _type.Question_1[0]._minA, _type.Question_2[0]._minA, _type.Question_3[0]._minA, _type.Question_4[0]._minA, _type.Question_5[0]._minA, _type.Question_6[0]._minA, _type.Question_7[0]._minA, _type.Question_8[0]._minA, _type.Question_9[0]._minA, _type.Question_10[0]._minA, _type.Question_11[0]._minA, _type.Question_12[0]._minA, _type.Question_13[0]._minA, _type.Question_14[0]._minA, _type.Question_15[0]._minA],
-                        ['B', _type.Question_1[0]._minB, _type.Question_2[0]._minB, _type.Question_3[0]._minB, _type.Question_4[0]._minB, _type.Question_5[0]._minB, _type.Question_6[0]._minB, _type.Question_7[0]._minB, _type.Question_8[0]._minB, _type.Question_9[0]._minB, _type.Question_10[0]._minB, _type.Question_11[0]._minB, _type.Question_12[0]._minB, _type.Question_13[0]._minB, _type.Question_14[0]._minB, _type.Question_15[0]._minB],
-                        ['C', _type.Question_1[0]._minC, _type.Question_2[0]._minC, _type.Question_3[0]._minC, _type.Question_4[0]._minC, _type.Question_5[0]._minC, _type.Question_6[0]._minC, _type.Question_7[0]._minC, _type.Question_8[0]._minC, _type.Question_9[0]._minC, _type.Question_10[0]._minC, _type.Question_11[0]._minC, _type.Question_12[0]._minC, _type.Question_13[0]._minC, _type.Question_14[0]._minC, _type.Question_15[0]._minC],
-                        ['D', _type.Question_1[0]._minD, _type.Question_2[0]._minD, _type.Question_3[0]._minD, _type.Question_4[0]._minD, _type.Question_5[0]._minD, _type.Question_6[0]._minD, _type.Question_7[0]._minD, _type.Question_8[0]._minD, _type.Question_9[0]._minD, _type.Question_10[0]._minD, _type.Question_11[0]._minD, _type.Question_12[0]._minD, _type.Question_13[0]._minD, _type.Question_14[0]._minD, _type.Question_15[0]._minD],
-                        ['E', _type.Question_1[0]._minE, _type.Question_2[0]._minE, _type.Question_3[0]._minE, _type.Question_4[0]._minE, _type.Question_5[0]._minE, _type.Question_6[0]._minE, _type.Question_7[0]._minE, _type.Question_8[0]._minE, _type.Question_9[0]._minE, _type.Question_10[0]._minE, _type.Question_11[0]._minE, _type.Question_12[0]._minE, _type.Question_13[0]._minE, _type.Question_14[0]._minE, _type.Question_15[0]._minE],
-                        ['其他', _type.Question_1[0]._minT, _type.Question_2[0]._minT, _type.Question_3[0]._minT, _type.Question_4[0]._minT, _type.Question_5[0]._minT, _type.Question_6[0]._minT, _type.Question_7[0]._minT, _type.Question_8[0]._minT, _type.Question_9[0]._minT, _type.Question_10[0]._minT, _type.Question_11[0]._minT, _type.Question_12[0]._minT, _type.Question_13[0]._minT, _type.Question_14[0]._minT, _type.Question_15[0]._minT]
-                    ]
-                })()
-            },
-            xAxis: { type: 'category' },
-            yAxis: { gridIndex: 0 },
-            grid: { top: '55%' },
-            series: [
-                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
-                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
-                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
-                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
-                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
-                { type: 'line', smooth: true, seriesLayoutBy: 'row' },
-                {
-                    type: 'pie',
-                    id: 'pie',
-                    radius: '30%',
-                    center: ['50%', '25%'],
-                    label: {
-                        formatter: '{b}: {@第一题} ({d}%)'
-                    },
-                    encode: {
-                        itemName: 'product',
-                        value: '第一题',
-                        tooltip: '第一题'
-                    }
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                 }
+            },
+            legend: {
+                data:['A','B','C','D','E','其他']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['第一题', '第二题', '第三题', '第四题', '第五题', '第六题', '第七题', '第八题', '第九题', '第十题', '第十一题', '第十二题', '第十三题', '第十四题', '第十五题']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'A',
+                    type:'bar',
+                    data:[
+                        _type.Question_1[0]._minA, 
+                        _type.Question_2[0]._minA, 
+                        _type.Question_3[0]._minA, 
+                        _type.Question_4[0]._minA, 
+                        _type.Question_5[0]._minA, 
+                        _type.Question_6[0]._minA, 
+                        _type.Question_7[0]._minA,
+                        _type.Question_8[0]._minA, 
+                        _type.Question_9[0]._minA, 
+                        _type.Question_10[0]._minA, 
+                        _type.Question_11[0]._minA, 
+                        _type.Question_12[0]._minA, 
+                        _type.Question_13[0]._minA, 
+                        _type.Question_14[0]._minA, 
+                        _type.Question_15[0]._minA
+                    ]
+                },
+                {
+                    name:'B',
+                    type:'bar',
+                    data:[
+                        _type.Question_1[0]._minB, 
+                        _type.Question_2[0]._minB, 
+                        _type.Question_3[0]._minB, 
+                        _type.Question_4[0]._minB, 
+                        _type.Question_5[0]._minB, 
+                        _type.Question_6[0]._minB, 
+                        _type.Question_7[0]._minB,
+                        _type.Question_8[0]._minB, 
+                        _type.Question_9[0]._minB, 
+                        _type.Question_10[0]._minB, 
+                        _type.Question_11[0]._minB, 
+                        _type.Question_12[0]._minB, 
+                        _type.Question_13[0]._minB, 
+                        _type.Question_14[0]._minB, 
+                        _type.Question_15[0]._minB
+                    ]
+                },
+                {
+                    name:'C',
+                    type:'bar',
+                    data:[
+                        _type.Question_1[0]._minC, 
+                        _type.Question_2[0]._minC, 
+                        _type.Question_3[0]._minC, 
+                        _type.Question_4[0]._minC, 
+                        _type.Question_5[0]._minC, 
+                        _type.Question_6[0]._minC, 
+                        _type.Question_7[0]._minC,
+                        _type.Question_8[0]._minC, 
+                        _type.Question_9[0]._minC, 
+                        _type.Question_10[0]._minC, 
+                        _type.Question_11[0]._minC, 
+                        _type.Question_12[0]._minC, 
+                        _type.Question_13[0]._minC, 
+                        _type.Question_14[0]._minC, 
+                        _type.Question_15[0]._minC
+                    ]
+                },
+                {
+                    name:'D',
+                    type:'bar',
+                    data:[
+                        _type.Question_1[0]._minD, 
+                        _type.Question_2[0]._minD, 
+                        _type.Question_3[0]._minD, 
+                        _type.Question_4[0]._minD, 
+                        _type.Question_5[0]._minD, 
+                        _type.Question_6[0]._minD, 
+                        _type.Question_7[0]._minD,
+                        _type.Question_8[0]._minD, 
+                        _type.Question_9[0]._minD, 
+                        _type.Question_10[0]._minD, 
+                        _type.Question_11[0]._minD, 
+                        _type.Question_12[0]._minD, 
+                        _type.Question_13[0]._minD, 
+                        _type.Question_14[0]._minD, 
+                        _type.Question_15[0]._minD
+                    ]
+                },
+                {
+                    name:'E',
+                    type:'bar',
+                    data:[
+                        _type.Question_1[0]._minE, 
+                        _type.Question_2[0]._minE, 
+                        _type.Question_3[0]._minE, 
+                        _type.Question_4[0]._minE, 
+                        _type.Question_5[0]._minE, 
+                        _type.Question_6[0]._minE, 
+                        _type.Question_7[0]._minE,
+                        _type.Question_8[0]._minE, 
+                        _type.Question_9[0]._minE, 
+                        _type.Question_10[0]._minE, 
+                        _type.Question_11[0]._minE, 
+                        _type.Question_12[0]._minE, 
+                        _type.Question_13[0]._minE, 
+                        _type.Question_14[0]._minE, 
+                        _type.Question_15[0]._minE
+                    ],
+                    // markLine : {
+                    //     lineStyle: {
+                    //         normal: {
+                    //             type: 'dashed'
+                    //         }
+                    //     },
+                    //     data : [
+                    //         [{type : 'min'}, {type : 'max'}]
+                    //     ]
+                    // }
+                },
+                {
+                    name:'其他',
+                    type:'bar',
+                    data:[
+                        _type.Question_1[0]._minT, 
+                        _type.Question_2[0]._minT, 
+                        _type.Question_3[0]._minT, 
+                        _type.Question_4[0]._minT, 
+                        _type.Question_5[0]._minT, 
+                        _type.Question_6[0]._minT, 
+                        _type.Question_7[0]._minT,
+                        _type.Question_8[0]._minT, 
+                        _type.Question_9[0]._minT, 
+                        _type.Question_10[0]._minT, 
+                        _type.Question_11[0]._minT, 
+                        _type.Question_12[0]._minT, 
+                        _type.Question_13[0]._minT, 
+                        _type.Question_14[0]._minT, 
+                        _type.Question_15[0]._minT
+                    ]
+                },
             ]
         };
 
-        myChart.on('updateAxisPointer', function (event) {
-            var xAxisInfo = event.axesInfo[0];
-            if (xAxisInfo) {
-                var dimension = xAxisInfo.value + 1;
-                myChart.setOption({
-                    series: {
-                        id: 'pie',
-                        label: {
-                            formatter: '{b}: {@[' + dimension + ']} ({d}%)'
-                        },
-                        encode: {
-                            value: dimension,
-                            tooltip: dimension
-                        }
-                    }
-                });
-            }
-        });
        myChart.setOption(option);  //初始化charts 函数
 
        document.getElementById('btn').addEventListener('click', function(e){
             window.location = '//uin8.com/technology/Squestionnaire'
        });
+
 </script>
 
 

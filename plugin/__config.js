@@ -355,7 +355,6 @@ module.exports.Squestionnaire = {
 			let towsLen = tows.length
 			let dataLen = data.length
 			for (var i = 0; i < dataLen; i++) {//循环数据库得到的数据，因为取出的数据格式为
-				//[{"id" : "101010100","provinceZh" : "北京","leaderZh" : "北京","cityZh" : "北京","cityEn" : "beijing"},{…………},{…………}]
 				let row = [];//用来装载每次得到的数据
 				for (let j = 0; j < towsLen; j++) {//内循环取出每个
 					row.push(data[i][tows[j]].toString());//row.push((data[i].tows[j]).toString());两种形式都是相同的
@@ -367,7 +366,18 @@ module.exports.Squestionnaire = {
 			res.setHeader('Content-Type', 'application/vnd.openxmlformats');//设置响应头
 			//设置下载文件命名 支持的excel文件类有.xlsx .xls .xlsm .xltx .xltm .xlsb .xlam等
 			res.setHeader("Content-Disposition", "attachment; filename=Questionnaire_"+ new Date().getTime() +".xlsx");
+			
 			res.end(result, 'binary');//将文件内容传入
 		});
+	}
+}
+
+
+module.exports.getAjaxError = {
+	get: function(req, res, next){
+		res.render('err')
+	},
+	post: function(req, res, next){
+		res.send({successful: 200})
 	}
 }
