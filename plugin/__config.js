@@ -3,6 +3,7 @@ var Model_data = require('../model/__data');
 //var Model_qrcode = require('../model/__qrcode');
 //var Model_state = require('../model/__state');
 var Model_questionnaire = require('../model/__xml');
+var Model_aop = require('../model/__aop');
 //var request = require('request');
 
 //const { Wechaty } = require('wechaty');
@@ -375,9 +376,22 @@ module.exports.Squestionnaire = {
 
 module.exports.getAjaxError = {
 	get: function(req, res, next){
-		res.render('err')
+		Model_aop.find({}, function(err, data){
+			res.render('err',{
+				body: JSON.stringify(data)
+			})
+		})
 	},
 	post: function(req, res, next){
-		res.send({successful: 200})
+		console.log(req.body);
+		Model_aop.create({
+			uri: req.body.uri,
+			async: req.body.async,
+			phone: req.body.phone,
+			data: req.body.data
+		},function(err, data){
+			req.session.data = data;
+			res.send({successful: 200})
+		})
 	}
 }
