@@ -1,5 +1,6 @@
 // JavaScript Document
 var _modu = require('../plugin/__config');
+var _data = require('../plugin/__data');
 
 module.exports = function (app){
 
@@ -61,7 +62,19 @@ module.exports = function (app){
 	app.get('/technology/Squestionnaire',_modu.Squestionnaire.get);
 
 	
-// 问卷导出
-	app.get('/error',_modu.getAjaxError.get);
-	app.post('/error',_modu.getAjaxError.post);
+	// 问卷导出
+	app.get('/show',_modu.getAjaxError.get);
+	app.post('/show',_modu.getAjaxError.post);
+
+	//自学考试时间安排
+	app.get('/examination',_modu.examination.get);
+
+	app.post('/test', _modu.tests.post);
+	
+	app.post('/client', _modu.client.post);
+
+	/**
+	 * 檬吧 订阅号 消息订阅 推送
+	 * **/
+	app.post('/wechatMessage', _data.wechatMessage.post);
 }

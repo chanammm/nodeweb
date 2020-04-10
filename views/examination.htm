@@ -1,0 +1,183 @@
+<% include common/header.htm %>
+
+<style type="text/css">
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        max-width: 640px;
+        min-width: 320px;
+        margin: 0 auto;
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+        background: #f6fbff;
+        text-align: center;
+        padding: 20px 5%;
+        box-sizing: border-box;
+    }
+
+    .container div {
+        height: 200px;
+        width: 100%;
+        background: #cddfec;
+        margin-bottom: 20px;
+        padding-top: 30px;
+        box-sizing: border-box;
+    }
+
+    .container div p em {
+        font-style: normal
+    }
+</style>
+
+<div class="container">
+    <div>报名时间
+        <p>现在距离报名截至时间还有：</p>
+        <p id="signUp"><em>0</em>天：<em>0</em>小时：<em>0</em>分钟：<em>0</em>秒</p>
+    </div>
+
+    <div>报考时间
+        <p>现在距离报考开始时间还有：</p>
+        <p id="enterExamin"><em>0</em>天：<em>0</em>小时：<em>0</em>分钟：<em>0</em>秒</p>
+    </div>
+
+    <div>考试时间
+        <p>现在距离考试开始时间还有：</p>
+        <p id="examination"><em>0</em>天：<em>0</em>小时：<em>0</em>分钟：<em>0</em>秒</p>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        let [timer, day, hour, minute, second, signUp, enterExamin, examination, timeSign, timeExamin, timeExamination, timeSignOut, timeExaminOut, timeExaminationOut] = [
+            new Date(),
+            0,
+            0,
+            0,
+            0,
+            document.getElementById('signUp'),
+            document.getElementById('enterExamin'),
+            document.getElementById('examination'),
+            '2020-01-4 08:00:00',
+            '2020-01-06 08:01:01',
+            '2020-01-05 08:00:00',
+            false,
+            false,
+            false
+        ];
+
+        function getTime(times) {
+            let date = new Date(times);
+
+            let year = date.getFullYear();
+
+            let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+
+            day = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+
+            hour = (date.getHours() < 10 ? '0' + (date.getHours()) : date.getHours());
+
+            minute = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes());
+
+            second = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
+
+            millisecond = (date.getMilliseconds() < 10 ? '0' + (date.getMilliseconds()) : date.getMilliseconds());
+
+            let time = year + "/" + month + "/" + day + ' ' + hour + ":" + minute + ":" + second + ":" + millisecond;
+
+            return time;
+        };
+
+        function setTime() {
+            let date = new Date();
+
+            let year = date.getFullYear();
+
+            let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+
+            day = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+
+            hour = (date.getHours() < 10 ? '0' + (date.getHours()) : date.getHours());
+
+            minute = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes());
+
+            second = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
+
+            millisecond = (date.getMilliseconds() < 10 ? '0' + (date.getMilliseconds()) : date.getMilliseconds());
+
+            let time = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second + ":" + millisecond;
+
+            return time;
+        };
+
+        timeSignOut = setInterval(() => {
+            try {
+                var total = (new Date(getTime(timeSign)).getTime() - new Date(setTime()).getTime()) / 1000;
+                var days = parseInt(total / (24 * 60 * 60));
+                var afterDay = total - days * 24 * 60 * 60;
+                var hours = parseInt(afterDay / (60 * 60));
+                var afterHour = total - days * 24 * 60 * 60 - hours * 60 * 60;
+                var min = parseInt(afterHour / 60);
+                var afterMin = parseInt(total - days * 24 * 60 * 60 - hours * 60 * 60 - min * 60); 
+
+                document.querySelectorAll('p#signUp>em')[0].innerHTML = days
+                document.querySelectorAll('p#signUp>em')[1].innerHTML = hours
+                document.querySelectorAll('p#signUp>em')[2].innerHTML = min
+                document.querySelectorAll('p#signUp>em')[3].innerHTML = afterMin
+
+            } catch (error) {
+                clearInterval(timeSignOut)
+                throw error
+            }
+        }, 0);
+        timeExaminOut = setInterval(() => {
+            try {
+                var total = (new Date(getTime(timeExamin)).getTime() - new Date(setTime()).getTime()) / 1000;
+                var days = parseInt(total / (24 * 60 * 60));
+                var afterDay = total - days * 24 * 60 * 60;
+                var hours = parseInt(afterDay / (60 * 60));
+                var afterHour = total - days * 24 * 60 * 60 - hours * 60 * 60;
+                var min = parseInt(afterHour / 60);
+                var afterMin = parseInt(total - days * 24 * 60 * 60 - hours * 60 * 60 - min * 60); 
+
+                document.querySelectorAll('p#enterExamin>em')[0].innerHTML = days
+                document.querySelectorAll('p#enterExamin>em')[1].innerHTML = hours
+                document.querySelectorAll('p#enterExamin>em')[2].innerHTML = min
+                document.querySelectorAll('p#enterExamin>em')[3].innerHTML = afterMin
+
+            } catch (error) {
+                clearInterval(timeExaminOut)
+                throw error
+            }
+        }, 0);
+        timeExaminationOut = setInterval(() => {
+            try {
+                var total = (new Date(getTime(timeExamination)).getTime() - new Date(setTime()).getTime()) / 1000;
+                var days = parseInt(total / (24 * 60 * 60));
+                var afterDay = total - days * 24 * 60 * 60;
+                var hours = parseInt(afterDay / (60 * 60));
+                var afterHour = total - days * 24 * 60 * 60 - hours * 60 * 60;
+                var min = parseInt(afterHour / 60);
+                var afterMin = parseInt(total - days * 24 * 60 * 60 - hours * 60 * 60 - min * 60); 
+
+                document.querySelectorAll('p#examination>em')[0].innerHTML = days
+                document.querySelectorAll('p#examination>em')[1].innerHTML = hours
+                document.querySelectorAll('p#examination>em')[2].innerHTML = min
+                document.querySelectorAll('p#examination>em')[3].innerHTML = afterMin
+
+            } catch (error) {
+                clearInterval(timeExaminationOut)
+                throw error
+            }
+        }, 0);
+    }
+</script>
+
+
+<% include common/footer.htm %>

@@ -3,8 +3,10 @@ var Model_data = require('../model/__data');
 //var Model_qrcode = require('../model/__qrcode');
 //var Model_state = require('../model/__state');
 var Model_questionnaire = require('../model/__xml');
+// var test = require('../model/test');
 var Model_aop = require('../model/__aop');
-//var request = require('request');
+var _data_ = require('../model/data');
+// var request = require('request');
 
 //const { Wechaty } = require('wechaty');
 //const bot = new Wechaty({ name: 'cnzmg' });
@@ -395,3 +397,95 @@ module.exports.getAjaxError = {
 		})
 	}
 }
+
+
+module.exports.examination = {
+	get: function (req, res, next){
+		res.render('examination',{
+			title: '自学考试时间安排'
+		})
+	}
+}
+
+
+
+module.exports.tests = {
+	post: function (req, res, next){
+		test.create({
+			uri: 'http://'
+		},function(err,_data){
+			if (err) {
+				res.send({
+					successful:400,
+					data:{
+						msg: '提交失败',
+						code: 809
+					}
+				});
+				return false
+			}else{
+				req.session.data = _data; //添加数据
+				res.send({
+					successful:200,
+					data:200
+				});
+			}
+		})
+	}
+}
+
+
+
+module.exports.client = {
+	get: function (req, res, next) {
+		console.log(req.url.split('?')[1]);
+		_data_.find({ key: req.url.split('?')[1] }, function (err, params) {
+			console.log(params);
+			if (err) {
+				console.log(err);
+				return false
+			} else {
+				res.render('index', { title: '首页', uri: JSON.stringify(params) });
+			}
+		})
+	},
+	post: function (req, res, next) {
+		console.log(123123)
+		let _key = new Date().getTime().toString(16);
+		let postData = {
+			uri: req.body.uri,
+			newUri: 'http://c.uin8.com/?' + _key.substring(5),
+			time: new Date().getTime(),
+			key: _key.substring(5)
+		};
+		_data_.find({ uri: req.body.uri }, function (err, params) {
+			if (err) {
+				console.log(err);
+				return false
+			} else {
+				if(params.length != 0) {
+					res.send({
+						data: '不更新',
+						newUri: params,
+						status: 300
+					})
+				}else{
+					_data_.create(postData, function (err, _data) {
+						if (err) {
+							console.log(err);
+							return false
+						} else {
+							req.session.data = _data; //添加数据
+							res.send({
+								data: '创建更新',
+								newUri: postData.newUri,
+								status: 200
+							})
+						}
+					});
+				}
+			}
+		})
+
+	}
+};
