@@ -18,15 +18,14 @@ module.exports.wechatMessage = {
 		// miniprogram_state	<string>		否		跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
         // lang					<string>		否		进入小程序查看”的语言类型，支持zh_CN(简体中文)、en_US(英文)、zh_HK(繁体中文)、zh_TW(繁体中文)，默认为zh_CN
         
-		// request({url: "https://api.weixin.qq.com/sns/jscode2session?appid=wxea82f54aaba948f9&secret=b7c088768a04e87c8b4989bd943ce3d7&js_code="+ req.body.code +"&grant_type=authorization_code",method: 'get',headers:{
-		// 	'Content-Type': 'application/json'
-		// }}, function (error, response, body) {
-        //     let openid = JSON.parse(body).openid;
+		request({url: "https://api.weixin.qq.com/sns/jscode2session?appid=wxea82f54aaba948f9&secret=b7c088768a04e87c8b4989bd943ce3d7&js_code="+ req.body.code +"&grant_type=authorization_code",method: 'get',headers:{
+			'Content-Type': 'application/json'
+		}}, function (error, response, body) {
+            let openid = JSON.parse(body).openid;
 
-        
-        let openid = "oF1Fa5DMlxLYm7PrGJ8VemENo3do";//目前仅仅个人 openid 提醒， 后期用户授权 存库openid
+        // let openid = "oF1Fa5DMlxLYm7PrGJ8VemENo3do";//目前仅仅个人 openid 提醒， 后期用户授权 存库openid
         //每分钟的第30秒定时执行一次:
-        schedule.scheduleJob('30 * * * * *',()=>{
+        schedule.scheduleJob('30 30 9 * * *',()=>{
             request({url: "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxea82f54aaba948f9&secret=b7c088768a04e87c8b4989bd943ce3d7",method: 'get',headers:{
 				'Content-Type': 'application/json'
 			}}, function (error, response, body) {
@@ -34,7 +33,7 @@ module.exports.wechatMessage = {
 					{
 						touser: openid,
 						template_id: "0SwJca8FeK7isMoY225yYFk6SaF5ZaQ40wprYQBX3AA",
-						page: "",
+						page: "/pages/index/index",
 						data: {
 							"thing1": {
 								"value": "生日卡"
@@ -70,6 +69,6 @@ module.exports.wechatMessage = {
             msg:'get request successful !',
         })
 
-		// })
+		})
 	}
 }
