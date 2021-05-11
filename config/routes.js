@@ -1,6 +1,27 @@
 // JavaScript Document
 var _modu = require('../plugin/__config');
 var _data = require('../plugin/__data');
+var uploadr = require('../plugin/uploadr');
+var moted = require('../plugin/moted');  //目前是 针对 邮件
+
+// 文件处理
+var multer = require('multer');
+var storage = multer.diskStorage({
+//设置上传后文件路径，uploads文件夹需要手动创建！！！
+	destination: function (req, file, cb) {
+		cb(null, './upload')
+	}, 
+//给上传文件重命名，获取添加后缀名
+	filename: function (req, file, cb) {
+		var fileFormat = (file.originalname).split(".");
+		cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+	}
+});  
+//添加配置文件到muler对象。
+var upload = multer({
+	storage: storage
+});
+
 
 module.exports = function (app){
 
@@ -77,4 +98,22 @@ module.exports = function (app){
 	 * 檬吧 订阅号 消息订阅 推送
 	 * **/
 	app.post('/wechatMessage', _data.wechatMessage.post);
+
+	/**
+	 * 2020-07-13
+	 * 外单 用户登陆注册
+	 * 音响 网站  作废
+	 * **/
+	app.get('/LoginUser', _modu.LoginUser.get);
+	app.post('/LoginUser', _modu.LoginUser.post);  //注册
+	app.post('/Login', _modu.Login.post);  //登陆
+
+
+	// ###### Wed Jan 27 17:48:05 CST 2021
+	app.get('/uploadr', uploadr.upload.get);
+	app.post('/uploadr', upload.single('pdf'), uploadr.upload.post);
+	app.put('/uploadr', uploadr.upload.put);
+
+	// ###### Tue May 11 15:47:54 CST 2021 push mail
+	app.post('/mail', moted.mail.post);
 }

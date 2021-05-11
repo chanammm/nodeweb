@@ -62,13 +62,38 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         var postdata = $(this).serialize();
 
-        alert('ok')
-        return false;
+        if (!$("#contact-form-name").val()) {
+            $("#contact-form-name").addClass("error");
+            return false;
+        }else{
+            $("#contact-form-name").removeClass("error");
+        }
+
+        if (!$("#contact-form-email").val()) {
+            $("#contact-form-email").addClass("error");
+            return false;
+        }else{
+            $("#contact-form-email").removeClass("error");
+        }
+
+        if (!$("#contact-form-phone").val()) {
+            $("#contact-form-phone").addClass("error");
+            return false;
+        }else{
+            $("#contact-form-phone").removeClass("error");
+        }
+
+        if (!$("#contact-form-message").val()) {
+            $("#contact-form-message").addClass("error");
+            return false;
+        }else{
+            $("#contact-form-message").removeClass("error");
+        }
 
         $.ajax({
 
             type: "POST",
-            url: "http:www.uin8.com/",
+            url: "/mail",
             data: postdata,
             dataType: "json",
             success: function(json) {
@@ -95,9 +120,14 @@ jQuery(document).ready(function($) {
 
                     }
 
-                }, 10);
+                    if (json.phoneMessage !== "") {
 
-                if (json.nameMessage === "" && json.emailMessage === "" && json.messageMessage === "") {
+                        $("#contact-form-phone").addClass("error");
+
+                    }
+
+                }, 10);
+                if (json.code < 1) {
 
                     $("#contact-form.error input, #contact-form.error textarea").removeClass("error");
                     $('#contact-form').addClass("success");

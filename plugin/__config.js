@@ -8,11 +8,14 @@ var Model_aop = require('../model/__aop');
 var _data_ = require('../model/data');
 // var request = require('request');
 
+
+// 2020-07-13 外单 用户登陆注册
+var userProfessional = require('../model/__login');
+
 //const { Wechaty } = require('wechaty');
 //const bot = new Wechaty({ name: 'cnzmg' });
 
 var nodeExcel = require('excel-export');  //引入excel 模块
-
 
 
 const __config = require('../public/json/configuraction.json');
@@ -436,7 +439,7 @@ module.exports.tests = {
 
 
 
-module.exports.client = {
+module.exports.client = {  //短链服务器
 	get: function (req, res, next) {
 		console.log(req.url.split('?')[1]);
 		_data_.find({ key: req.url.split('?')[1] }, function (err, params) {
@@ -450,7 +453,6 @@ module.exports.client = {
 		})
 	},
 	post: function (req, res, next) {
-		console.log(123123)
 		let _key = new Date().getTime().toString(16);
 		let postData = {
 			uri: req.body.uri,
@@ -489,3 +491,113 @@ module.exports.client = {
 
 	}
 };
+
+/**
+ * 2020-07-13
+ * 外单 用户登陆注册
+ * 音响 网站  作废
+* **/
+module.exports.LoginUser = {
+	get: function(req, res, next){
+		userProfessional.find({}, function (err, params) {
+			if (err) {
+				console.log(err);
+				return false
+			} else {
+				res.send({
+					data: '成功',
+					errData: params,
+					status: 200
+				})
+			}
+		})
+	}, 
+	post:function(req, res, next){
+		let postData = {
+			phone: req.body.phone,
+			email: req.body.email,
+			pwd: req.body.pwd,
+			time: new Date().getTime(),
+			loginTime: new Date().getTime()
+		};
+		userProfessional.find({ phone: req.body.phone }, function (err, params) {
+			if (err) {
+				console.log(err);
+				return false
+			} else {
+				if(params.length != 0) {
+					res.send({
+						data: '该手机号码已存在',
+						errData: params,
+						status: 300
+					})
+				}else{
+					userProfessional.create(postData, function (err, _data) {
+						if (err) {
+							console.log(err);
+							return false
+						} else {
+							req.session.data = _data; //添加数据
+							res.send({
+								data: '创建成功',
+								errData: postData.phone,
+								status: 200
+							})
+						}
+					});
+				}
+			}
+		})
+	}
+} 
+/**
+ * 2020-07-13
+ * 外单 用户登陆注册
+ * 音响 网站  作废
+* **/
+module.exports.Login = {
+	post: function(req, res, next){
+		userProfessional.find({ phone: req.body.phone }, function (err, params) {
+			if (err) {
+				console.log(err);
+				return false
+			} else {
+				if(params.length < 1){
+					res.send({
+						data: '无此用户',
+						errData: params,
+						status: 400
+					})
+					return false;
+				}
+				if(params[0].pwd != req.body.pwd) {
+					res.send({
+						data: '密码错误',
+						errData: params[0]._id,
+						status: 300
+					})
+				}else{
+					userProfessional.update({
+						_id: params[0]._id
+					}, {
+						$set: {
+							loginTime: new Date().getTime()
+						}
+					}, function (err){
+						let resJson = {};
+						if(err) {
+							resJson.data = '更新失败';
+							resJson.status = 300;
+							resJson.errData = err
+						}else{
+							resJson.data = '登陆成功';
+							resJson.errData = params[0].phone
+							resJson.status = 200;
+						}
+						res.send(resJson);
+					});
+				}
+			}
+		})
+	}
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传</title>
+</head>
+<body>
+    <%= follow.age %> <br />
+    ......
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="pdf">
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        Function.prototype.before = function(beforefn) {
+            let __self = this; 
+            return function() { 
+                beforefn.apply(this, arguments);
+                return __self.apply(this, arguments);
+        }};
+        Function.prototype.after = function(afterfn) {
+            let __self = this; 
+            return function() { 
+                let ret = __self.apply(this, arguments); 
+                afterfn.apply(this, arguments); 
+                return ret; 
+        }};
+        document.addEventListener("DOMContentLoaded", function (res) {
+            class Init {
+                constructor () {
+                    let __self = this;
+                    document.querySelector('input[name=pdf]').onchange = function() {
+                        // return false;
+                        __self.load(this.files[0])
+                    };
+                }
+
+                load (file) {
+                    console.log(document.querySelector('input[name=pdf]').value)
+                    console.log(file)
+
+                    let formData = new FormData();
+                    formData.append('pdf', file);
+
+                    fetch('/uploadr', {method: 'post', body: formData })
+                    // .then(response => {
+                    //     return response.json();
+                    // })
+                    .then(response => {
+                        // response.body is a readable stream.
+                        // Calling getReader() gives us exclusive access to the stream's content
+                        var reader = response.body.getReader();
+                        var bytesReceived = 0;
+
+                        // read() returns a promise that resolves when a value has been received
+                        reader.read().then(function processResult(result) {
+                            // Result objects contain two properties:
+                            // done  - true if the stream has already given you all its data.
+                            // value - some data. Always undefined when done is true.
+                            if (result.done) {
+                                console.log("Fetch complete");
+                                return;
+                            }
+
+                            // result.value for fetch streams is a Uint8Array
+                            bytesReceived += result.value.length;
+                            console.log('Received', bytesReceived, 'bytes of data so far');
+
+                            // Read some more, and call this function again
+                            return reader.read().then(processResult);
+                        });
+                        this.aop()
+                    }).catch(err => {
+                        console.error(err)
+                    })
+                }
+
+                aop () {
+                    let func = function() { 
+                        console.log(2);
+                    };
+                    func.before(function() { 
+                        console.log(1);
+                    }).after(function() { 
+                        console.log(3);
+                    });
+                }
+            }
+            new Init()
+        })
+    </script>
+</body>
+</html>
