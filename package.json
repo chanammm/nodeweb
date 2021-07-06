@@ -16,7 +16,14 @@
     "http-errors": "~1.6.2",
     "mongoose": "5.4.3",
     "morgan": "^1.9.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "filesource": "^1.0.7",
+    "os-tmpdir": {
+      "integrity": "sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=",
+      "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz",
+      "version": "1.0.2"
+    },
+    "tmp": "0.0.33"
   },
   "devDependencies": {
     "excel-export": "^0.5.1",
@@ -24,5 +31,7 @@
     "node-schedule": "^1.3.2",
     "nodemailer": "^6.6.0",
     "wechaty": "^0.22.6"
-  }
+  },
+  "requires": true,
+  "lockfileVersion": 1
 }

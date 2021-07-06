@@ -3,6 +3,7 @@ var _modu = require('../plugin/__config');
 var _data = require('../plugin/__data');
 var uploadr = require('../plugin/uploadr');
 var moted = require('../plugin/moted');  //目前是 针对 邮件
+var wx = require('../plugin/wx');  //目前是 针对 wx
 
 // 文件处理
 var multer = require('multer');
@@ -114,6 +115,14 @@ module.exports = function (app){
 	app.post('/uploadr', upload.single('pdf'), uploadr.upload.post);
 	app.put('/uploadr', uploadr.upload.put);
 
+	// ###### Thu May 13 15:28:18 CST 2021
+	// 拆解 pdf
+	app.post('/pdf', uploadr.devpdf.post);
+
 	// ###### Tue May 11 15:47:54 CST 2021 push mail
 	app.post('/mail', moted.mail.post);
+
+	// ###### Thu Jun 3 17:09:41 CST 2021 
+	app.post('/wxtoken', wx.wxtoken.post); // 获取微信 ass token
+	app.post('/qr', wx.qr.post); // 获取微信 公众号长期二维码
 }

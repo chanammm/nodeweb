@@ -38,46 +38,66 @@
                 }
 
                 load (file) {
-                    console.log(document.querySelector('input[name=pdf]').value)
-                    console.log(file)
+                    // console.log(document.querySelector('input[name=pdf]').value)
+                    // console.log(file)
 
                     let formData = new FormData();
                     formData.append('pdf', file);
 
                     fetch('/uploadr', {method: 'post', body: formData })
-                    // .then(response => {
-                    //     return response.json();
-                    // })
                     .then(response => {
-                        // response.body is a readable stream.
-                        // Calling getReader() gives us exclusive access to the stream's content
-                        var reader = response.body.getReader();
-                        var bytesReceived = 0;
-
-                        // read() returns a promise that resolves when a value has been received
-                        reader.read().then(function processResult(result) {
-                            // Result objects contain two properties:
-                            // done  - true if the stream has already given you all its data.
-                            // value - some data. Always undefined when done is true.
-                            if (result.done) {
-                                console.log("Fetch complete");
-                                return;
-                            }
-
-                            // result.value for fetch streams is a Uint8Array
-                            bytesReceived += result.value.length;
-                            console.log('Received', bytesReceived, 'bytes of data so far');
-
-                            // Read some more, and call this function again
-                            return reader.read().then(processResult);
-                        });
+                        return response.json();
+                    })
+                    .then(response => {
+                        console.log(response)
+                        if(response.code < 1){
+                            fetch('/pdf', {method: 'post', body: JSON.stringify(response),
+                            headers: {
+                                'user-agent': 'Mozilla/4.0 MDN Example',
+                                'content-type': 'application/json'
+                            }})
+                            .then(response => {
+                                console.log(response)
+                            })
+                        }
                         this.aop()
-                    }).catch(err => {
+                    })
+                    // .then(response => {
+                    //     // response.body is a readable stream.
+                    //     // Calling getReader() gives us exclusive access to the stream's content
+                    //     var reader = response.body.getReader();
+                    //     var bytesReceived = 0;
+
+                    //     // read() returns a promise that resolves when a value has been received
+                    //     reader.read().then(function processResult(result) {
+                    //         // Result objects contain two properties:
+                    //         // done  - true if the stream has already given you all its data.
+                    //         // value - some data. Always undefined when done is true.
+                    //         if (result.done) {
+                    //             console.log("Fetch complete");
+                    //             // fetch('/pdf', {method: 'post', body: {}})
+                    //             // .then(response => {
+                    //             //     console.log(response)
+                    //             // })
+                    //             return;
+                    //         }
+
+                    //         // result.value for fetch streams is a Uint8Array
+                    //         bytesReceived += result.value.length;
+                    //         console.log('Received', bytesReceived, 'bytes of data so far');
+
+                    //         // Read some more, and call this function again
+                    //         return reader.read().then(processResult);
+                    //     });
+                    //     this.aop()
+                    // })
+                    .catch(err => {
                         console.error(err)
                     })
                 }
 
                 aop () {
+                    console.log('aop')
                     let func = function() { 
                         console.log(2);
                     };
@@ -86,6 +106,7 @@
                     }).after(function() { 
                         console.log(3);
                     });
+                    func()
                 }
             }
             new Init()
