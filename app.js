@@ -33,7 +33,23 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'htm');
 app.engine('.htm', require('ejs').renderFile);
 
+// let logcb = (tokens, req, res) => {
+//     return [
+//         tokens.method(req, res), // 请求方式
+//         '状态：' +tokens.status(req, res), // 请求状态
+//         '请求地址：' +tokens.url(req, res), // 请求链接
+//         ' ' +tokens.date(req, res, 'iso'), // 时间格式 clf iso web 默认clf
+//         tokens['remote-addr'](req, res), // 远程地址
+//         tokens['remote-user'](req, res), // 远程用户
+//         tokens['http-version'](req, res), // http 版本
+//         tokens.res(req, res, 'content-length'), '-', // 请求长度
+//         tokens['response-time'](req, res), 'ms', // 响应时间
+//         tokens['user-agent'](req, res) // 浏览器信息
+//     ].join(' ')
+// }
+// logger.format('type',logcb)
 
+// app.use(logger('type'));
 app.use(logger('dev'));
 app.use(bodyParser.json({limit: 100000}));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

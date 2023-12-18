@@ -4,6 +4,9 @@ var _data = require('../plugin/__data');
 var uploadr = require('../plugin/uploadr');
 var moted = require('../plugin/moted');  //目前是 针对 邮件
 var wx = require('../plugin/wx');  //目前是 针对 wx
+var dy = require('../plugin/dy');  //目前是 针对 抖音
+// var fstest = require('../plugin/fstest');  //目前是 测试 应用
+var ms = require("../plugin/ms");
 
 // 文件处理
 var multer = require('multer');
@@ -118,6 +121,7 @@ module.exports = function (app){
 	// ###### Thu May 13 15:28:18 CST 2021
 	// 拆解 pdf
 	app.post('/pdf', uploadr.devpdf.post);
+	app.post('/memo', uploadr.memo.post);
 
 	// ###### Tue May 11 15:47:54 CST 2021 push mail
 	app.post('/mail', moted.mail.post);
@@ -125,4 +129,40 @@ module.exports = function (app){
 	// ###### Thu Jun 3 17:09:41 CST 2021 
 	app.post('/wxtoken', wx.wxtoken.post); // 获取微信 ass token
 	app.post('/qr', wx.qr.post); // 获取微信 公众号长期二维码
+	app.post('/DzGzqrCode', wx.DzGzqrCode.post); // 2022 1 7 获取微信 公众号长期二维码
+
+	app.get('/DzGzqrStatus', wx.DzGzqrStatus.get); // 2022 1 7 获取微信 公众号长期二维码
+	app.post('/DzGzqrStatus', wx.DzGzqrStatus.post); // 2022 1 7 获取微信 公众号长期二维码
+
+	// ###### Fri Jul 30 16:18:10 CST 2021
+	app.get('/miniwx', wx.miniwx.get); // 小程序客服
+	app.post('/miniwx', wx.miniwx.post); // 小程序客服
+
+	
+	app.get('/qiyetest', wx.qiyetest.get); // 小程序客服
+
+	app.get('/lay', wx.lay.get); // 短链链接到 打开微信小程序
+	app.post('/lay', wx.lay.post); // 短链链接到 打开微信小程序
+	app.get('/cay', wx.cay.get); // 短链链接到 打开微信小程序
+	app.post('/cay', wx.cay.post); // 短链链接到 打开微信小程序
+
+	// 20210903
+	app.get('/getminiqrcode', wx.getminiqrcode.get);
+	app.post('/getminiqrcode', wx.getminiqrcode.post); // 获取大正官方微商城的小程序码
+	app.post('/getCminiqrcode', wx.getCminiqrcode.post); // 获取精选商城的小程序码
+	app.post('/wxminitoken', wx.wxminitoken.post); //获取小程序 token
+	app.post('/cwxminitoken', wx.cwxminitoken.post) //c端微信小程序的 获取token（非登录token）
+	
+	app.post('/dyms', dy.dyms.post); //抖音的 消息获取推送
+
+	// app.get('/fstest', fstest.fs.get);
+
+	// 20230317 服务器迁移+重整服务内容
+	// 公众号消息推送服务
+	app.get('/ms', ms.msu.get);
+	app.post('/ms', ms.msu.post);
+
+	// 20230830 增加qm 配置
+	app.get('/qm.api.conf/ajax', wx.api.get);
+	app.post('/qm.api.conf/ajax', wx.api.post);
 }

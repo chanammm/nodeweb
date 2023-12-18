@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div></div>
+    <img src="" alt="">
+    <script>
+        var xml = new XMLHttpRequest();
+          xml.open('post', 'http://uin8.com/getminiqrcode', true)
+          xml.responseType = 'arraybuffer';
+          xml.setRequestHeader('content-type', "image/png");
+          xml.send();
+          xml.onreadystatechange = () =>{
+              if (xml.status == 200 && xml.readyState == 4) {
+                let bytes = new Uint8Array(xml.response);
+                let storeData = "";
+                let len = bytes.byteLength;
+                for (let i = 0; i < len; i++) {
+                    storeData += String.fromCharCode(bytes[i]);
+                }
+                document.querySelector('div').setAttribute('style', `width:100px;height: 100px;background-image: url(data:image/png;base64,${window.btoa(storeData)})`)
+                document.querySelector('img').setAttribute('src', `data:image/png;base64,${window.btoa(storeData)}`)
+              }
+          }
+    </script>
+</body>
+</html>
